@@ -22,13 +22,21 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 - Cluster, ArgoCD 접근 용도의 IAM 계정 생성
   - 실습 용도의 IAM 계정 생성
-- Security Rule (보안 정책) 생성
-  - 실습을 위해 간단하게 `AdministratorAccess` 권한을 가진 Security Rule 생성
+
+  - 실습을 위해 간단하게 `AdministratorAccess` 권한을 가진 사용자 그룹, 사용자 생성
+
 - AWS Cloud 9 셋업 
   - 개발 PC OS 및 환경에 따라 생기는 불일치를 해결하기 위해 선택
+
+- EKS,k8s 접근 도구 셋업
+
   - kubectl 설치
   - eksctl 설치
   - helm 설치
+
+- Cloud 9의 Access Key, Access Key Secret 새로고침 문제 해결방식
+
+<br>
 
 
 
