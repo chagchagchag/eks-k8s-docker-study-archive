@@ -111,5 +111,9 @@ error: You must be logged in to the server (Unauthorized)
 $ source export-acess-key-gitops-study-argocd.sh
 ```
 
+<br>
 
+
+
+자세한 내용은 [(에러대응) error: You must be logged in to the server (the server has asked for the client to provide credentials)](https://github.com/chagchagchag/eks-k8s-docker-study-archive/blob/main/eks-by-argocd/(%EC%97%90%EB%9F%AC%EB%8C%80%EC%9D%91)%20error%20You%20must%20be%20logged%20in%20to%20the%20server%20(the%20server%20has%20asked%20for%20the%20client%20to%20provide%20credentials).md) 에 정리해두었다.
 
