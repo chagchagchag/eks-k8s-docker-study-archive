@@ -4,7 +4,7 @@ Cloud9 의 경우 따로 IAM User 를 따로 생성할 필요 없이 Cloud9 자�
 
 그런데 Cloud9 에서 미리 세팅된 환경으로 제공해주는 credential 은 부족한 권한들도 있다. Cloud 9 내의 Credentials (`~/.aws/credentials` ) 는 Cloud 9 내부적으로 주기적으로 secret key, secret access, session token 을 업데이트한다. 따라서 이 것들을 수정해서 권한이 높은 계정으로 바꿔준다거나 하는 작업을 하면 토큰 값들을 업데이트하고 하는 것들이 불가능하다.<br>
 
-따라서 직접 관리자 권한(AdministratorAccess)을 가진 IAM User 로부터 Access Key, Access Key Secret 을 발급하고 이것을 `/.aws/credentials` 내에 다른 변수명으로 저장한 후 이것을 이용해 eks cluster 생성, eks worker node 생성을 진행할 예정이다.<br>
+따라서 직접 관리자 권한(AdministratorAccess)을 가진 IAM User 로부터 Access Key, Access Key Secret 을 발급하고 이것을 외부의 스크립트로 기존 환경변수를 덮어쓰게 해주면 되는데, 이번 문서에서는 Access Key, Access Key Secret 을 발급하는 절차를 정리해두었다. 외부의 스크립트로 기존 환경변수를 덮어쓰게 해주는 방식은 [Step1.접근환경구성 (4) Cloud9 의 Access Key, Access Key Secret 새로고침문제 해결방법]() 에 정리해두었다.
 
 <br>
 
