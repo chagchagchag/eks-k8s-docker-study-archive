@@ -103,3 +103,40 @@ Commands:
 
 <br>
 
+
+
+## helm 설치
+
+helm 설치에 대한 명령어는 [helm.sh - Installing Helm ## From Script](https://helm.sh/docs/intro/install/#from-script) 의 내용을 발췌해다.<br>
+
+이번 예제 프로젝트에서는 ALB Ingress Controller 를 helm 을 이용해서 설치 예정이다. 따라서 Cloud9 에 helm 을 설치해야 한다.<br>
+
+```bash
+## helm.sh 라는 이름으로 헬름 설치 파일을 curl 로 다운로드
+$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+
+## 다운로드 받은 파일 확안
+$ ls
+README.md  download  get_helm.sh  minimum-cluster.yml
+
+## 실행 권한 변경
+$ chmod 0700 get_helm.sh
+
+## 설치파일 실행
+$ ./get_helm.sh 
+Downloading https://get.helm.sh/helm-v3.13.1-linux-amd64.tar.gz
+Verifying checksum... Done.
+Preparing to install helm into /usr/local/bin
+helm installed into /usr/local/bin/helm
+```
+
+<br>
+
+
+
+
+
+
+
+
+
