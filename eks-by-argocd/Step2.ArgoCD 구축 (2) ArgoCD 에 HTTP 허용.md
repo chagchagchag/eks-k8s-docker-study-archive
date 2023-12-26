@@ -308,7 +308,7 @@ argocd-server-nodeport                    NodePort    10.100.53.245    <none>   
 
 ### 80 포트 rule 이 적용된 Security Rule Id 를 명시한 Ingress 생성 (ingress.yml 작성 → apply)
 
-80 포트 인바운드 허용 Rule 이 적용된 subnet id 를 찾는 방법, Security Rule 생성하는 방법에 대해서는 미리 정리해둔 문서인 [Step1.접근환경구성 (5) ArgoCD ALB 용도의 Ingress 에 서브넷 지정, 보안 그룹 생성]() 을 참고하면 된다.<br>
+80 포트 인바운드 허용 Rule 이 적용된 subnet id 를 찾는 방법, Security Rule 생성하는 방법에 대해서는 미리 정리해둔 문서인 [Step1.접근환경구성 (5) ArgoCD ALB 용도의 Ingress 에 서브넷 지정, 보안 그룹 생성](https://github.com/chagchagchag/eks-k8s-docker-study-archive/blob/main/eks-by-argocd/Step1.%EC%A0%91%EA%B7%BC%ED%99%98%EA%B2%BD%EA%B5%AC%EC%84%B1%20(5)%20ArgoCD%20ALB%20%EC%9A%A9%EB%8F%84%EC%9D%98%20Ingress%20%EC%97%90%20%EC%84%9C%EB%B8%8C%EB%84%B7%20%EC%A7%80%EC%A0%95%2C%20%EB%B3%B4%EC%95%88%20%EA%B7%B8%EB%A3%B9%20%EC%83%9D%EC%84%B1.md) 을 참고하면 된다.<br>
 
 <br>
 
@@ -428,3 +428,4 @@ ec2 대시보드에서 로드밸런서가 잘 생성되어있는지 확인해보
 이 Healthy 라고 하는 상태는 상태검사 탭에서 볼수 있듯 /heathz 에 대해 주기적으로 체크함으로써 얻어내는 상태값이다.
 
 <img src="./img/ARGOCD-SETUP-2-POD-EXEC-ARGUMENT-CHANGE/11.png"/>
+
