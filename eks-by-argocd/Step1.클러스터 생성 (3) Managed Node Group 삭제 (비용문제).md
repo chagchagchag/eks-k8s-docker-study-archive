@@ -1,0 +1,1 @@
+## Step1.클러스터 생성 (3) Managed Node Group 삭제 (비용문제)

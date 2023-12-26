@@ -1,0 +1,1 @@
+## Step1.클러스터 생성 (2) eksctl 을 사용해 EKS Nodegroup 생성
