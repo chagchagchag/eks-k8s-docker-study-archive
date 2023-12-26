@@ -8,6 +8,38 @@ Cloud9 의 경우 따로 IAM User 를 따로 생성할 필요 없이 Cloud9 자�
 
 <br>
 
+우선 `export-access-key-gitops-study-argocd.sh` 라는 파일을 만들어서 아래와 같은 내용을 작성한다.<br>
+
+<br>
+
+
+
+**export-access-key-gitops-study-argocd.sh**
+
+```bash
+export AWS_ACCESS_KEY_ID=액세스키
+export AWS_SECRET_ACCESS_KEY=시크릿 키
+export AWS_DEFAULT_REGION=ap-northeast-2
+```
+
+<br>
+
+
+
+그리고 이것을 아래와 같이 Cloud 9 로그인 시마다 실행시켜준다.
+
+```bash
+source export-access-key-gitops-study-argocd.sh
+```
+
+<br>
+
+
+
+물론 `~/.bashrc` 등에 입력해두고 사용하는 것이 좋은 선택일 수 있지만, 나는 그냥 수동으로 입력하는 방법을 선택했다.
+
+<br>
+
 
 
 
