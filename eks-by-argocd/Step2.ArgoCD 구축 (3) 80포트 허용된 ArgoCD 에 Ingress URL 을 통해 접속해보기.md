@@ -1,0 +1,1 @@
+## Step2.ArgoCD 구축 (3) 80포트 허용된 ArgoCD 에 Ingress URL 을 통해 접속해보기
