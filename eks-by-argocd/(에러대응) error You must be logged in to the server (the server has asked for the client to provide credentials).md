@@ -55,6 +55,8 @@ export AWS_DEFAULT_REGION=ap-northeast-2
 
 환경변수 활성화
 
+위와 같은 쉘스크립트를 Cloud 9 에 접속할 때마다 아래의 명령을 수행해주거나 아래의 코드를 `~/.bashrc` 에 정의해둔다.
+
 ```bash
 $ source export-acess-key-gitops-study-argocd.sh
 ```
