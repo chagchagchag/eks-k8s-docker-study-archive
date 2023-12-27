@@ -28,6 +28,10 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 - Cloud 9의 Access Key, Access Key Secret 새로고침 문제 해결방식
 
+- ECR 구성
+  - 문서로 정리하기에는 간단한 내용이긴 하지만, 일단 이것도 기록으로 남겨두기로 결정.
+
+
 <br>
 
 
@@ -63,7 +67,7 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 ## Step 3. Backend 2 tier Application Dockerfile 구성 및 docker-compose 테스트
 
-nginx, spring boot 기반
+nginx, spring boot, gradle, jib, java 17 기반
 
 - 간단한 helloworld spring boot application 을 Nginx 와 연동 후 docker-compose 로 약식 테스트
 - k8s 적용시 또 다른 이야기가 되기에 docker-compose 테스트가 무의미해질 수 있기는 하지만 일단은 이렇게 결정
@@ -78,7 +82,7 @@ nginx, react 기반
 
 - nuxt.js, next.js 이런 것도 개인적으로 스터디 하고 있기에, 적용해볼까 하고 생각했었다. 
 
-- 하지만 가급적 예제의 간단함을 위해 간단한 nginx helloworld 페이지를 활용하기로 함.
+- 하지만 가급적 예제의 간단함을 위해 간단한 nginx + react helloworld 페이지를 활용하기로 함.
 
 <br>
 
