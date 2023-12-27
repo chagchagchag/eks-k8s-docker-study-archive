@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minikube-example-boot
+  namespace: minikube-example-boot
+  labels:
+    app: minikube-example-boot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minikube-example-boot
+  template:
+    metadata:
+      labels:
+        app: minikube-example-boot
+    spec:
+      containers:
+        - name: minikube-example-boot
+          image: chagchagchag/minikube-example-boot:latest
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: minikube-example-boot
+  namespace: minikube-example-boot
+  labels:
+    app: minikube-example-boot
+spec:
+  selector:
+    app: minikube-example-boot
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 30080
+  type: NodePort
