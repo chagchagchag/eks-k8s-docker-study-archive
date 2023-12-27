@@ -49,7 +49,7 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 
-테스트환경 구성
+로컬 테스트 환경 구성
 
 - minikube 설치
 - minikube 사용 예제 
