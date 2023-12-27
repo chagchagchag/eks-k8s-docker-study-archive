@@ -49,6 +49,15 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 
+테스트환경 구성
+
+- minikube 설치
+- minikube 사용 예제 
+
+<br>
+
+
+
 ## Step 2. ArgoCD 구축
 
 - argoCD 공식 github 제공 yml 매니페스트 파일을 이용해 argoCD 설치
@@ -65,24 +74,29 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 
-## Step 3. Backend 2 tier Application Dockerfile 구성 및 docker-compose 테스트
+## Step 3. Backend 2 tier Application Dockerfile 구성 및 로컬 테스트
 
 nginx, spring boot, gradle, jib, java 17 기반
 
-- 간단한 helloworld spring boot application 을 Nginx 와 연동 후 docker-compose 로 약식 테스트
-- k8s 적용시 또 다른 이야기가 되기에 docker-compose 테스트가 무의미해질 수 있기는 하지만 일단은 이렇게 결정
+- 간단한 helloworld spring boot application, Nginx 기반의 2tier 애플리케이션
+- 테스트
+  - 1\. minikube
+  - 2\. docker-compose
+
 
 <br>
 
 
 
-## Step 4. Frontend 2 tier Application Dockerfile 구성 및 docker-compose 테스트
+## Step 4. Frontend 2 tier Application Dockerfile 구성 및 로컬 테스트
 
 nginx, react 기반
 
 - nuxt.js, next.js 이런 것도 개인적으로 스터디 하고 있기에, 적용해볼까 하고 생각했었다. 
 
 - 하지만 가급적 예제의 간단함을 위해 간단한 nginx + react helloworld 페이지를 활용하기로 함.
+
+- 로컬 테스트는 minikube 로 테스트
 
 <br>
 
