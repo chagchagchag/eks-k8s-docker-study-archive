@@ -1,4 +1,4 @@
-## Minikube 기반 Spring Boot Helloworld (jib 빌드 방식)
+## Minikube 에서 테스트 - Spring Boot Helloworld (jib 빌드 방식)
 
 
 
