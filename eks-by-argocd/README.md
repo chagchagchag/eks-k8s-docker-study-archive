@@ -52,7 +52,8 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 로컬 테스트 환경 구성
 
 - [github.com/chagchagchag/eks-k8s-docker-study-archive/minikube/Minikube 설치하기](https://github.com/chagchagchag/eks-k8s-docker-study-archive/blob/main/minikube/Minikube%20%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0.md)
-- [github.com/chagchagchag/eks-k8s-docker-study-archive/minikube/Minikube 기반 Spring Boot Helloworld](https://github.com/chagchagchag/eks-k8s-docker-study-archive/blob/main/minikube/Minikube%20%EA%B8%B0%EB%B0%98%20Spring%20Boot%20Helloworld.md)
+- [github.com/chagchagchag/eks-k8s-docker-study-archive/minikube/Minikube 기반 Spring Boot Helloworld (일반 Dockerfile 기반 빌드)](https://github.com/chagchagchag/eks-k8s-docker-study-archive/blob/main/minikube/Minikube%20%EA%B8%B0%EB%B0%98%20Spring%20Boot%20Helloworld.md)
+- [github.com/chagchagchag/eks-k8s-docker-study-archive/minikube/Minikube 기반 Spring Boot Helloworld (jib 빌드)]()
 
 <br>
 
