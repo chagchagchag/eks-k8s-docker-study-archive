@@ -1,0 +1,52 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.1'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'com.google.cloud.tools.jib' version '3.4.0'
+}
+
+group = 'dev.k8s.gogogo'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+jib{
+	from {
+		image = "amazoncorretto:17"
+	}
+	to {
+		image = "chagchagchag/minikube-example-boot-plaindockerfile"
+		tags = ["latest"]
+	}
+	container{
+		creationTime = "USE_CURRENT_TIMESTAMP"
+
+		jvmFlags = [
+				"-XX:+UseContainerSupport",
+				"-XX:+UseG1GC",
+				"-verbose:gc",
+				"-XX:+PrintGCDetails",
+				"-Dserver.port=8080",
+				"-Dfile.encoding=UTF-8",
+		]
+
+		ports = ["8080"]
+
+		labels = [maintainer: "chagchagchag <chagchagchag.dev@gmail.com>"]
+	}
+}

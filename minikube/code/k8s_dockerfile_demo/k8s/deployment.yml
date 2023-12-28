@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minikube-example-boot-plaindockerfile
+  namespace: minikube-example-boot-plaindockerfile
+  labels:
+    app: minikube-example-boot-plaindockerfile
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minikube-example-boot-plaindockerfile
+  template:
+    metadata:
+      labels:
+        app: minikube-example-boot-plaindockerfile
+    spec:
+      containers:
+        - name: minikube-example-boot-plaindockerfile
+          image: chagchagchag/minikube-example-boot-plaindockerfile:latest
+          ports:
+            - containerPort: 8080
