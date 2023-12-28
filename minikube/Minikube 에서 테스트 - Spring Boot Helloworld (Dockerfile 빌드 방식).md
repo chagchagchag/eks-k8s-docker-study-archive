@@ -271,13 +271,16 @@ spec:
 ## 쿠버네티스 배포를 위한 디렉터리인 k8s 로 이동
 $ cd k8s
 
-
+## namespace 등록
 $ kubectl create -f namespace.yml
 
+## deployment 구동
 $ kubectl create -f deployment.yml
 
+## service 구동
 $ kubectl create -f service.yml
 
+## minikube 에서 구동
 $ minikube service minikube-example-boot-plaindockerfile -n minikube-example-boot-plaindockerfile
 W1228 09:15:53.040788   26896 main.go:291] Unable to resolve the current Docker CLI context "default": context "default": context not found: open C:\Users\soong\.docker\contexts\meta\37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f\meta.json: The system cannot find the path specified.
 |---------------------------------------|---------------------------------------|-------------|---------------------------|

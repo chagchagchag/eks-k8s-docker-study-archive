@@ -230,6 +230,9 @@ spec:
 ### 배포
 
 ```bash
+## 쿠버네티스 배포를 위한 디렉터리인 k8s 로 이동
+$ cd k8s
+
 ## namespace 등록
 $ kubectl create -f namespace.yml
 namespace/minikube-example-boot created
