@@ -109,7 +109,8 @@ nginx, react 기반
 
 ## Step 6. ArgoCD 적용
 
-
+- minikube 환경에서 Argo CD 배포환경 구성 (Github Action, Rollouts, etc)
+- AWS 환경에서 Argo CD 배포환경 구성 (Github Action, Rollouts, etc)
 
 
 
