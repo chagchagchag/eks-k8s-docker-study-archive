@@ -12,17 +12,34 @@
 
 대표적으로 서비스의 일부 기능이 장애가 나지 않도록 인스턴스 종료 직전 가장 마지막으로 들어온 요청 까지만 처리하고 그 이후의 요청부터는 받지 않는 우아한 종료를 예로 들 수 있다.<br>
 
-쿠버네티스는 이러한 무중단 배포를 지원한다. 대표적으로 블루/그린 배포, 롤링 업데이트 배포, 카나리 배포 방식을 예로 들 수 있다.<br>
+쿠버네티스는 이러한 무중단 배포를 지원한다. 대표적으로 블루/그린(Blue/Green) 배포, 롤링 업데이트(Rolling Update) 배포, 카나리(Canary) 배포 방식을 예로 들 수 있다.<br>
+
+- 블루 그린 (Blue/Green) 방식
+- 카나리 (Canary) 방식
+- 롤링 업데이트 (Rolling Update) 방식
+
+<br>
+
+
 
 흔히 Nginx 를 이용해서 무중단 배포를 하는 등의 글들이 인터넷에 많이 돌아다니는데, 이번에 알아볼 무중단 배포 방식은 쿠버네티스에서 채택하는 무중단 배포 방식들이다.<br>
 
 <br>
 
-## Rolling Update, Blue/Green 방식
+## Rolling Update, Blue/Green, Canary
 
 무중단 배포 방식 들 중 가장 많이 사용되는 방식은 롤링 업데이트 (Rolling Update) 방식이다.<br>
 
-ArgoCD 를 사용할 경우 흔히 Argo Rollout 이라고 하는 Argo 진영의 라이브러리를 사용해서 Blue/Green 형태로 배포하기도 한다.
+ArgoCD 를 사용할 경우 흔히 **Argo Rollouts** 이라고 하는 Argo 진영의 라이브러리를 사용하면 블루/그린(Blue/Green) 방식, 카나리(Canary) 방식의 배포를 모두 지원한다.<br>
+
+<br>
+
+
+
+Argo CD 의 Argo Rollouts 가 지원하는 배포방식들
+
+- 블루/그린 (Blue/Green) 방식
+- 카나리 (Canary) 방식
 
 <br>
 
