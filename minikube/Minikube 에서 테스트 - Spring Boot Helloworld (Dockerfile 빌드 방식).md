@@ -95,7 +95,37 @@ jib{
 }
 ```
 
+<br>
 
 
 
+### Dockerfile
+
+```dockerfile
+FROM openjdk:17-alpine AS jar-image
+WORKDIR deploy
+COPY build/libs/k8s_dockerfile_demo-0.0.1-SNAPSHOT.jar app.jar
+RUN java -jar -Djarmode=layertools app.jar extract
+
+FROM openjdk:17-alpine
+WORKDIR deploy
+COPY --from=jar-image deploy/dependencies/ ./
+COPY --from=jar-image deploy/snapshot-dependencies/ ./
+COPY --from=jar-image deploy/spring-boot-loader/ ./
+COPY --from=jar-image deploy/application/ ./
+
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+```
+
+<br>
+
+
+
+```bash
+## 빌드
+$ ./gradlew clean && ./gradlew build
+
+## 도커 이미지 빌드
+$ docker build --tag chagchagchag/minikube-example-boot-plaindockerfile:latest .
+```
 
