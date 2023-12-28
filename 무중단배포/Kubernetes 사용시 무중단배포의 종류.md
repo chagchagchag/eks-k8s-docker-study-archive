@@ -30,7 +30,7 @@
 
 무중단 배포 방식 들 중 가장 많이 사용되는 방식은 롤링 업데이트 (Rolling Update) 방식이다.<br>
 
-ArgoCD 를 사용할 경우 흔히 **Argo Rollouts** 이라고 하는 Argo 진영의 라이브러리를 사용하면 블루/그린(Blue/Green) 방식, 카나리(Canary) 방식의 배포를 모두 지원한다.<br>
+ArgoCD 를 사용할 경우 흔히 **Argo Rollouts** 이라고 하는 Argo 진영의 라이브러리를 사용하면 블루/그린(Blue/Green) 방식, 카나리(Canary) 방식의 배포를 모두 지원가능해진다.<br>
 
 <br>
 
