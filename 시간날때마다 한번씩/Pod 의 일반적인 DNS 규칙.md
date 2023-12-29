@@ -28,7 +28,7 @@ Headless Service 단위로 배포된 Pod 들은 일반 Service 를 통해 수행
 
 ## 일반 Service 로 배포된 Pod 들의 DNS 규칙 
 
-Headless Service 단위로 배포되지 않은 일반 Service 로 배포된 Pod 들 역시 아래와 같은 형식의 DNS 를 가진다. 맨 앞에 있는 pod ip 주소는 상황에 따라 유동적으로 변할 수 있기에 고정적인 주소가 아니라는 점에 주의해야 한다.
+Headless Service 단위로 배포되지 않은 일반 Service 로 배포된 Pod 들도 DNS 를 가진다. 맨 앞에 있는 `pod ip 주소`는 상황에 따라 유동적으로 변할 수 있기에 고정적인 주소가 아니라는 점에 주의해야 한다.
 
 - `[pod ip 주소].[namespace].pod.cluster.local`
 

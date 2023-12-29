@@ -20,7 +20,7 @@ Headless Service 를 사용하면 Pod 마다 고정된 DNS를 생성가능해진
 
 Headless Service 로 묶인 Pod 들에 대해 생성되는 고정된 DNS 는 아래와 같은 형식을 갖는다.
 
-- `[pod-name].[svc].[namespace].svc.cluster.local`
+- `[pod 이름].[svc].[namespace].svc.cluster.local`
 
 Headless Services 는 service.yml 에 `spec.clusterIP` 를 None 으로 정의해서 생성 가능하다.
 
