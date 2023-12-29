@@ -24,5 +24,12 @@ Headless Service 로 묶인 Pod 들에 대해 생성되는 고정된 DNS 는 아
 
 Headless Services 는 service.yml 에 `spec.clusterIP` 를 None 으로 정의해서 생성 가능하다.
 
+<br>
 
 
+
+## 참고
+
+- [왜 StatefulSet 을 사용할까 (feat. deployment 와의 차이점)](https://ltlkodae.tistory.com/54)
+
+<br>
