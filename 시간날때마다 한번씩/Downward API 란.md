@@ -8,6 +8,15 @@ Downward API 는 실행 중인 컨테이너에 Pod 또는 컨테이너의 필드
 
 
 
+## 참고
+
+- [쿠버네티스 공식 문서 - 다운워드(Downward) API](https://kubernetes.io/ko/docs/concepts/workloads/pods/downward-api/#downwardapi-fieldRef)
+- [jib 사용시 jvm 옵션을 동적으로 설정하는 방법](https://tangoblog.tistory.com/18) 
+
+<br>
+
+
+
 ## 요약
 
 흔히 개발작업을 하다보면, [jib 사용시 jvm 옵션을 동적으로 설정하는 방법](https://tangoblog.tistory.com/18) 과 같은 문서를 참고해서 jib 빌드 시에 주입되어야 하는 환경변수들을 쿠버네티스의 특정 필드를 통해서 주입하는 경우가 있다. 예를 들어 [jib 사용시 jvm 옵션을 동적으로 설정하는 방법](https://tangoblog.tistory.com/18) 에서 사용하는 yaml 내에서 사용되는 필드 들 중 `status.podIP`, `metadata.name` 이 그 경우다.<br>
