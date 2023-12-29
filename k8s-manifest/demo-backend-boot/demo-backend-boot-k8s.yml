@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-backend-boot
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-backend-boot-nodeport
+  namespace: demo-backend-boot
+spec:
+  selector:
+    app: demo-backend-boot-app
+  ports:
+  - protocol: TCP
+    port: 8080
+    nodePort: 30080
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-backend-boot-app
+  namespace: demo-backend-boot
+spec:
+  selector:
+    matchLabels:
+      app: demo-backend-boot-app
+  template:
+    metadata:
+      labels:
+        app: demo-backend-boot-app
+    spec:
+      containers:
+      - name: demo-backend-boot-app
+        image: chagchagchag/minikube-example-boot:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
