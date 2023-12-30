@@ -48,7 +48,7 @@ Pod 내에 Container 의 형태로 애플리케이션이 구동되는 시점에 
 
 ### 다운워드 API 의 상위 필드 - `fieldRef`, `resourceFieldRef`
 
-이때 Pod 의 주요 정보들은 `fieldRef` 필드를 통해 하위 속성들을 접근가능하고 Container 의 주요 정보들은 `resourceFieldRef` 필드를 통해 주요 하위 속성들을 접근 가능하다.<br>
+이때 Pod 의 주요 정보들은 `fieldRef` 필드를 통해 접근가능하고 Container 의 주요 정보들은 `resourceFieldRef` 필드를 통해 접근 가능하다.<br>
 
 - Pod 의 주요정보 : `fieldRef`
 - Container 의 주요정보 : `resourceFieldRef`<br>
