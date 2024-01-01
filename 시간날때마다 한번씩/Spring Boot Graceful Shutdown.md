@@ -2,10 +2,6 @@
 
 Spring Boot 2.3 부터는 graceful shutdown 옵션을 직접 지정할 수 있다.<br>
 
-원본 문서는 [여기](https://github.com/chagchagchag/kotlin-study-archive/blob/main/kopring/Spring%20Boot%20Graceful%20Shutdown.md)에 정리했던 문서. <br>
-
-명색이 kubernetes 관련 스터디 아카이브 리포지터리인데 Graceful Shutdown 문서가 없다는게 허전해서 문서의 사본을 하드카피로 여기에도 옮겨둠.<br>
-
 <br>
 
 
