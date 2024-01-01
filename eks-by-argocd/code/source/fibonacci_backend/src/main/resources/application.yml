@@ -1,1 +1,10 @@
+server:
+  shutdown: graceful
 
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 50s
+
+#logging:
+#  file:
+#    name: /var/log/app/fibonacci.log
