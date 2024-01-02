@@ -75,29 +75,18 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 
-## Step 3. Backend 2 tier Application Dockerfile 구성 및 로컬 테스트
+## Step 3. Backend Application
+- fibonacci-backend-web
+- fibonacci-backend-cache
+- fibonacci-backend-batch
 
-nginx, spring boot, gradle, jib, java 17 기반
-
-- 간단한 helloworld spring boot application, Nginx 기반의 2tier 애플리케이션
-- 테스트
-  - 1\. minikube
-  - 2\. docker-compose
-
-
+Kubernetes 의 여러가지 자원들 (ConfigMap, Secret, PV, Job, CronJob)을 혼합한 Backend 예제<br>
+백수가 만드는 쿠버네티스 백엔드 예제. 기대하시라. 개봉박두!!<br>
 <br>
 
-
-
 ## Step 4. Frontend 2 tier Application Dockerfile 구성 및 로컬 테스트
-
-nginx, react 기반
-
-- nuxt.js, next.js 이런 것도 개인적으로 스터디 하고 있기에, 적용해볼까 하고 생각했었다. 
-
-- 하지만 가급적 예제의 간단함을 위해 간단한 nginx + react helloworld 페이지를 활용하기로 함.
-
-- 로컬 테스트는 minikube 로 테스트
+- 스킵.
+- 2024.3Q에 시작 예정
 
 <br>
 
@@ -113,4 +102,10 @@ nginx, react 기반
 - AWS 환경에서 Argo CD 배포환경 구성 (Github Action, Rollouts, etc)
 
 
+
+## 참고자료 
+- [한번에 끝내는 CI/CD Docker 부터 GitOps 까지](https://fastcampus.co.kr/dev_online_cicd)
+  - 기초부분 건너뛰고 ArgoCD 부분부터 정리 중이었는데, 지금은 잠깐 중단
+  - 중간에 예제로 제공하는 Backend 애플리케이션이 마음에 안들어서 직접 새로 작성하기로 해서 중단하게 되었음.
+  - 나머지 내용들(kustomize, ArgoCD 인증 보안 등 배포프로세스 만드는 부분들)은 꽤 알차고 강의설명이 깔끔해서 진도가 빠르게 나간다. 돈이 안아까웠다.
 
