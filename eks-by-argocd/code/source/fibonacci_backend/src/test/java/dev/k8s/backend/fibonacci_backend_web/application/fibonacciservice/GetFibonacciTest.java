@@ -1,7 +1,6 @@
-package dev.k8s.backend.fibonacci_backend.application.fibonacciservice;
+package dev.k8s.backend.fibonacci_backend_web.application.fibonacciservice;
 
-import dev.k8s.backend.fibonacci_backend.application.FibonacciService;
-import org.assertj.core.api.Assertions;
+import dev.k8s.backend.fibonacci_backend_web.application.FibonacciService;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

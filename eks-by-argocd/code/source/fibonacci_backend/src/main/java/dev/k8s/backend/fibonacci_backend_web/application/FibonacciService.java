@@ -1,4 +1,4 @@
-package dev.k8s.backend.fibonacci_backend.application;
+package dev.k8s.backend.fibonacci_backend_web.application;
 
 import org.springframework.stereotype.Service;
 

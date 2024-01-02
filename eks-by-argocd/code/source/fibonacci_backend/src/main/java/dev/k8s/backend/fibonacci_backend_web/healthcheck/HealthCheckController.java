@@ -1,4 +1,4 @@
-package dev.k8s.backend.fibonacci_backend.healthcheck;
+package dev.k8s.backend.fibonacci_backend_web.healthcheck;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

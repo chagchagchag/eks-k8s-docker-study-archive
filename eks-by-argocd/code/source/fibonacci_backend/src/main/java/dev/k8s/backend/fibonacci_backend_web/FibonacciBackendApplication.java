@@ -1,4 +1,4 @@
-package dev.k8s.backend.fibonacci_backend;
+package dev.k8s.backend.fibonacci_backend_web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
