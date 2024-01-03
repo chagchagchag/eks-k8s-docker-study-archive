@@ -76,22 +76,61 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 ## Step 3. Backend Application
-- (작업중) fibonacci-backend-web
-  - SpringBoot, Spring Boot Starter Web, Spring Boot Starter Redis
 
-- (작업중) fibonacci-backend-cache
-  - SpringBoot, Spring Boot Starter Web, Spring Boot Starter Redis
-  - 캐싱 or 중간정도 큰 피보나치 계산에 대해 레디스 기반 작업 큐 기반의 처리
-  - 그렇다고 엄청 열심히 작성하는 건 아니고 레디스 기반으로.. 어떻게 하는지 예제를 정리하기 위한 용도.
+**모듈/애플리케이션 구조**
 
-- fibonacci-backend-batch
-  - SpringBoot, Spring Boot Starter Web, Spring Boot Starter Redis
-  - Fibonnacci 중 굉장히 큰 데이터 계산이 필요한 경우에 대한 시나리오
+> - 실무에서 이렇게 대충 구성하지는 않지만 여러개의 deployment (cache, web, batch) 가 통신하는 예제를 위해서 단순하게 구상하다보니 이렇게 되어버림.
+> - cache, web, batch 의 이름이 부자연스러운데 모듈명 이름 짓는 것에 스트레스를 살짝 받아서 일단 이렇게 해둠. 추후 각 모듈들의 이름 변경예정.
 
 
 
+<img src="./img/CODE-EXAMPLE/1.png"/>
+
+**자료 구조**
+
+- 간단한 예제이지만 어느 정도 조금은 구색을 갖춰야 해서 자료구조를 set 하나 정도만 살짝 추가
+
+- `fibonacci-result-set` 
+  - 예제 용도의 간단한 Set 구조
+- `fibonacci-task-queue`
+  - 예제 용도의 간단한 Set 구조
 
 <br>
+
+
+
+**모듈/애플리케이션 역할**
+
+- (작업중. 모듈명 변경 예정) fibonacci-backend-cache
+  - 간단한 캐싱레이어.
+  - 모듈명 변경 예정
+  - fibonacci 계산 요청 중 100 이상을 넘어가는 수 처럼 천문학적인 계산이 이뤄지는 경우는 작업큐에 넣어두는 역할 수행
+  - 이미 계산된 수는 result-set 에 저장해두고 저장된 결과를 리턴하게끔 구성
+  - **ingress, service, deployment** 으로 구성 (클러스터 외부 통신은 ingress 로 통신)
+- (작업중. 모듈명 변경 예정) fibonacci-backend-web
+  - fibonacci 계산 역할
+  - 모듈 명 변경 예정
+  - **service, deployment** 로 구성 (클러스터 내부에서만 ClusterIP 로 통신)
+- fibonacci-backend-batch
+  - 계산이 오래 걸리는천문학적인 숫자의 fibonacci 계산 역할
+  - **service, deployment** 로 구성 (클러스터 내부에서 Cluster IP 로 통신)
+
+<br>
+
+
+
+**Redis**
+
+- 현업에서 Redis 는 보통 클러스터로 구성해서 스탠드 얼론으로 구성하고 전문 운영자가 계시는 경우가 많지만
+- 이번 예제는 실습 용도이기에 로컬 kubernetes default 네임스페이스에서 구동
+- default 네임스페이스에 구성하더라도 같은 클러스터 내부에 다른 Pod 들이 있다면 아래의 주소로 접근 가능
+  - `{redis-pod 명}.{네임스페이스 명}.{리소스 유형}.cluster.local`
+  - e.g. 
+    - `redis-service.default.svc.cluster.local`
+
+<br>
+
+
 
 ## Step 4. Frontend 2 tier Application Dockerfile 구성 및 로컬 테스트
 - 스킵.
