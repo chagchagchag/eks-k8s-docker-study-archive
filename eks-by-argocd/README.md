@@ -76,12 +76,21 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 ## Step 3. Backend Application
-- fibonacci-backend-web
-- fibonacci-backend-cache
-- fibonacci-backend-batch
+- (작업중) fibonacci-backend-web
+  - SpringBoot, Spring Boot Starter Web, Spring Boot Starter Redis
 
-Kubernetes 의 여러가지 자원들 (ConfigMap, Secret, PV, Job, CronJob)을 혼합한 Backend 예제<br>
-백수가 만드는 쿠버네티스 백엔드 예제. 기대하시라. 개봉박두!!<br>
+- (작업중) fibonacci-backend-cache
+  - SpringBoot, Spring Boot Starter Web, Spring Boot Starter Redis
+  - 캐싱 or 중간정도 큰 피보나치 계산에 대해 레디스 기반 작업 큐 기반의 처리
+  - 그렇다고 엄청 열심히 작성하는 건 아니고 레디스 기반으로.. 어떻게 하는지 예제를 정리하기 위한 용도.
+
+- fibonacci-backend-batch
+  - SpringBoot, Spring Boot Starter Web, Spring Boot Starter Redis
+  - Fibonnacci 중 굉장히 큰 데이터 계산이 필요한 경우에 대한 시나리오
+
+
+
+
 <br>
 
 ## Step 4. Frontend 2 tier Application Dockerfile 구성 및 로컬 테스트
