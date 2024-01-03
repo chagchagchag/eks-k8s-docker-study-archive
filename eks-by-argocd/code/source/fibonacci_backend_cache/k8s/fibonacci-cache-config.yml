@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fibonacci-cache-config
+  namespace: fibonacci
+data:
+  language: "ko"

@@ -11,6 +11,6 @@ spec:
             path: /fibonacci
             backend:
               service:
-                name: fibonacci-cache-service
+                name: fibonacci-backend-cache-service
                 port:
                   number: 8080
