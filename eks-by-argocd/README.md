@@ -107,6 +107,9 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
   - fibonacci 계산 요청 중 100 이상을 넘어가는 수 처럼 천문학적인 계산이 이뤄지는 경우는 작업큐에 넣어두는 역할 수행
   - 이미 계산된 수는 result-set 에 저장해두고 저장된 결과를 리턴하게끔 구성
   - **ingress, service, deployment** 으로 구성 (클러스터 외부 통신은 ingress 로 통신)
+  - PV,PVC 이용 기능들
+    - 서비스/애플리케이션 재기동 요청 발생시 우아한 종료를 통해 가장 마지막 요청이나, 이미 계산해둔 내용을 디스크에 저장하기 위해 PV, PVC 를 이용해서 디스크에 기록하는 기능 
+    - 1초에 한번씩 1초동안 들어온 요청들을 PV, PVC에 기록하는 기능 
 - (작업중. 모듈명 변경 예정) fibonacci-backend-web
   - fibonacci 계산 역할
   - 모듈 명 변경 예정
