@@ -40,6 +40,8 @@ minikube 와 유사한 도구다.<br>
 
 설명은 주석으로 추가
 
+참고로 docker desktop 또는 docker engine 이 구동중인 상태에서 실행해야 한다.
+
 ```bash
 ### 1) 클러스터 'kind-cluster-1' 생성
 $ kind create cluster --name kind-cluster-1
@@ -140,6 +142,9 @@ Deleted nodes: ["kind-cluster-1-control-plane"]
 $ kind delete cluster --name sample-work
 Deleting cluster "sample-work" ...
 Deleted nodes: ["sample-work-control-plane"]
+
+$ kind get clusters
+No kind clusters found.
 ```
 
 <br>
