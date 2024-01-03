@@ -1,13 +1,19 @@
 
-## kubectl
+## 1. kind setting
 ```bash
-$ kubectl apply -f fibonacci-backend-namespace.yml 
+$ kind create cluster --name fibonacci-cluster
+```
+<br>
+
+## 2. kubectl
+```bash
+$ kubectl apply -f fibonacci-web-namespace.yml 
 namespace/fibonacci created
 
-$ kubectl apply -f fibonacci-backend-deploy.yml 
-deployment.apps/my-fibonacci-app created
+$ kubectl apply -f fibonacci-web-deploy.yml 
+deployment.apps/fibonacci-backend-web-deploy created
 
-$ kubectl apply -f fibonacci-backend-service.yml 
-service/fibonacci-app-service created
+$ kubectl apply -f fibonacci-web-service.yml 
+service/fibonacci-backend-web-service created
 ```
-
+<br>
