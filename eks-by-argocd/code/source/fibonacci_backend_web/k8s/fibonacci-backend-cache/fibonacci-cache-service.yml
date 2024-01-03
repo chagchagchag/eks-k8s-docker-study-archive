@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fibonacci-backend-cache-service
+  namespace: fibonacci
+spec:
+  selector:
+    app: fibonacci-backend-cache
+  ports:
+    - protocol: TCP
+      port: 8080
