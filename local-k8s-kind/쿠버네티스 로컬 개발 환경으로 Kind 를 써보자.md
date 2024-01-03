@@ -36,7 +36,7 @@ minikube 와 유사한 도구다.<br>
 
 
 
-## 간단한 테스트
+## 간단한 명령어들 요약
 
 설명은 주석으로 추가
 
@@ -126,6 +126,20 @@ nginx   1/1     Running   0          13s
 ### 9) nginx 파드 삭제
 $ kubectl delete pods nginx
 pod "nginx" deleted
+
+
+### 10) 클러스터 삭제 실습
+$ kind get clusters
+kind-cluster-1
+sample-work
+
+$ kind delete cluster --name kind-cluster-1
+Deleting cluster "kind-cluster-1" ...
+Deleted nodes: ["kind-cluster-1-control-plane"]
+
+$ kind delete cluster --name sample-work
+Deleting cluster "sample-work" ...
+Deleted nodes: ["sample-work-control-plane"]
 ```
 
 <br>
