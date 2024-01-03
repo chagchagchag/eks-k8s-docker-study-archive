@@ -28,7 +28,7 @@ spec:
             claimName: cache-log-storage-claim
       containers:
         - name: fibonacci
-          image: chagchagchag/fibonacci-backend-cache:0.0.6
+          image: chagchagchag/fibonacci-backend-cache:0.0.1
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: /fibonacci/logs
@@ -39,12 +39,12 @@ spec:
             - name: APP_LANGUAGE
               valueFrom:
                 configMapKeyRef:
-                  name: fibonacci-config
+                  name: fibonacci-cache-config
                   key: language
             - name: API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: fibonacci-secret
+                  name: fibonacci-cache-secret
                   key: api-key
           lifecycle:
             preStop:

@@ -32,7 +32,7 @@ jib {
 	}
 
 	to{
-		image = "chagchagchag/fiboancci-backend-cache"
+		image = "chagchagchag/fibonacci-backend-cache"
 		tags = ["0.0.1", "latest"]
 	}
 
