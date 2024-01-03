@@ -12,4 +12,5 @@ kubectl apply -f ../fibonacci-backend-cache/fibonacci-cache-deploy.yml
 echo ""
 echo "[create] fibonacci-backend-web"
 kubectl apply -f ../fibonacci-backend-web/fibonacci-web-service.yml
+kubectl apply -f ../fibonacci-backend-web/fibonacci-web-hpa.yml
 kubectl apply -f ../fibonacci-backend-web/fibonacci-web-deploy.yml

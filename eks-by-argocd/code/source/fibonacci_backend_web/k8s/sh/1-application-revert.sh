@@ -1,6 +1,7 @@
 echo ""
 echo "[delete] fibonacci-backend-web"
 kubectl delete -f ../fibonacci-backend-web/fibonacci-web-service.yml
+kubectl delete -f ../fibonacci-backend-web/fibonacci-web-hpa.yml
 kubectl delete -f ../fibonacci-backend-web/fibonacci-web-deploy.yml
 
 echo ""
