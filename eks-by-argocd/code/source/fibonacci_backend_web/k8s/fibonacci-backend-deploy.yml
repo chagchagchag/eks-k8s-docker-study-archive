@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-fibonacci-app
+  name: fibonacci-backend-web-deploy
   namespace: fibonacci
 spec:
   replicas: 2
@@ -12,16 +12,16 @@ spec:
       maxUnavailable: 0
   selector:
     matchLabels:
-      app: fibonacci-app
+      app: fibonacci-backend-web
   template:
     metadata:
       labels:
-        app: fibonacci-app
+        app: fibonacci-backend-web
     spec:
       terminationGracePeriodSeconds: 60
       containers:
         - name: fibonacci
-          image: chagchagchag/fibonacci-app:0.0.1
+          image: chagchagchag/fibonacci-backend-web:0.0.1
           imagePullPolicy: Always
           resources:
             requests:

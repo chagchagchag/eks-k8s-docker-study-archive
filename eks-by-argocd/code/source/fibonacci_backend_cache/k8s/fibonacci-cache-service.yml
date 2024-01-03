@@ -5,7 +5,7 @@ metadata:
   namespace: fibonacci
 spec:
   selector:
-    app: fibonacci-backend-cache-service
+    app: fibonacci-backend-cache
   ports:
     - protocol: TCP
       port: 8080
