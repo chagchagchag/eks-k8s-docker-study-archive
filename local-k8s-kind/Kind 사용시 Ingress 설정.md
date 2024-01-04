@@ -27,6 +27,7 @@ nginx ingress controller 는 대부분 yaml 버전으로 stable 버전을 제공
 ## 참고
 
 - [Kind - User Guide/Ingress](https://kind.sigs.k8s.io/docs/user/ingress/)
+- [참고 - Helm 으로 nginx ingress controller 설치하기](https://hyeo-noo.tistory.com/385)
 
 <br>
 
