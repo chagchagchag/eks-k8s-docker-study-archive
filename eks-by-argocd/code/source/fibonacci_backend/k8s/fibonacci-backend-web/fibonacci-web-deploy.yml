@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fibonacci-backend-web-deploy
+  namespace: fibonacci
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: fibonacci-backend-web
+  template:
+    metadata:
+      labels:
+        app: fibonacci-backend-web
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: fibonacci
+          image: chagchagchag/fibonacci-backend-web:0.0.1
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "1000m"
+            limits:
+              memory: "1Gi"
+              cpu: "1500m"
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh","-c","sleep 10"]
+          startupProbe:
+            httpGet:
+              path: /probe/startup
+              port: 8080
+            initialDelaySeconds: 45
+            periodSeconds: 1
+            failureThreshold: 10
+          readinessProbe:
+            httpGet:
+              path: /probe/ready
+              port: 8080
+            initialDelaySeconds: 45
+            periodSeconds: 1
+            successThreshold: 1
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /probe/live
+              port: 8080
+            initialDelaySeconds: 45
+            periodSeconds: 1
+            failureThreshold: 10

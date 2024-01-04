@@ -1,0 +1,2 @@
+자꾸 일일이 치는게 귀찮아서 적어둠
+kubectl -n fibonacci logs [파드명] -c fibonacci --follow

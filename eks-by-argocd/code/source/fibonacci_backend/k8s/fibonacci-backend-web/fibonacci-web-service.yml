@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fibonacci-backend-web-service
+  namespace: fibonacci
+spec:
+  selector:
+    app: fibonacci-backend-web
+  ports:
+    - protocol: TCP
+      port: 8080

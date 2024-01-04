@@ -1,0 +1,14 @@
+server:
+  shutdown: graceful
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 50s
+  data:
+    redis:
+      host: redis-server.default.svc.cluster.local
+      port: 6379
+
+#logging:
+#  file:
+#    name: /var/log/app/fibonacci.log
