@@ -9,7 +9,8 @@ echo ""
 echo "$ kubectl apply -f ../fibonacci-namespace.yml"
 kubectl apply -f ../local-storage.yml
 
-echo "--- redis setting ---"
+echo ""
+echo "[redis]"
 echo "kubectl apply -f ../redis-pod.yml"
 kubectl apply -f ../redis-pod.yml
 echo "kubectl apply -f ../redis-service.yml"

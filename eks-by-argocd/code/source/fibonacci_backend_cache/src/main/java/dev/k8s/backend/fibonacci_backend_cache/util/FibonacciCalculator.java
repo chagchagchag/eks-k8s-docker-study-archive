@@ -12,7 +12,7 @@ public class FibonacciCalculator {
     private final RestClient fibonacciClient = RestClient.create();
     public Optional<BigDecimal> requestGetFibonacci(int number) {
         String result = fibonacciClient.get()
-                .uri("http://fibonacci-backend-web-service:8080/factorial?number="+number)
+                .uri("http://fibonacci-backend-web-service:8080/fibonacci?number="+number)
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, (request, response) -> {
                     throw new RuntimeException("invalid server response "+ response.getStatusText());

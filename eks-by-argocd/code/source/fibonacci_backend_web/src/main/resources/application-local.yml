@@ -1,0 +1,14 @@
+server:
+  shutdown: graceful
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 50s
+  data:
+    redis:
+      host: localhost
+      port: 16379
+
+#logging:
+#  file:
+#    name: /var/log/app/fibonacci.log

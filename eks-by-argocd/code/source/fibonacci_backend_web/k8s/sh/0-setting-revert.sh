@@ -3,7 +3,7 @@ kubectl delete -f ../fibonacci-common/local-storage.yml
 kubectl delete -f ../fibonacci-common/fibonacci-namespace.yml
 
 echo ""
-echo "[delete] redis setting ---"
+echo "[delete] redis setting"
 echo "kubectl delete -f ../fibonacci-common/redis-pod.yml"
 kubectl delete -f ../fibonacci-common/redis-pod.yml
 echo "kubectl delete -f ../fibonacci-common/redis-service.yml"
