@@ -1,1 +1,3 @@
-rootProject.name = 'fibonacci_backend_web'
+rootProject.name = 'fibonacci_backend'
+include("fibonacci-backend-web")
+include("fibonacci-backend-cache")
