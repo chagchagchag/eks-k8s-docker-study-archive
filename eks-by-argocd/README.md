@@ -141,7 +141,7 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 	- 우아한 종료 시 Offheap 스토리지에 요청 데이터를 저장하는 용도.
 	- DB 에 실패 기록 기능은 이미 준비되어 있는 정상적인 상태라고 가정 
 		- (예제의 단순함을 위해 이번 예제에서는 DB저장 등의 기능은 다루지는 않기로 결정)
-<br>
+		<br>
 
 관련 자료 
 - [Deploying on Kubernetes](https://docs.hazelcast.com/hazelcast/5.3/kubernetes/deploying-in-kubernetes)
@@ -153,9 +153,28 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 
+### Screenshot
+
+> `v0.0.1`
+
+<img src="./img/CODE-EXAMPLE/2.png"/>
+
+<br>
+
+<img src="./img/CODE-EXAMPLE/3.png"/>
+
+
+
+<br>
+
+<img src="./img/CODE-EXAMPLE/4.png"/>
+
+<br>
+
 
 
 ## Step 4. frontend : `fibonacci-frontend`
+
 - 스킵.
 - 2024.3Q에 시작 예정
 
