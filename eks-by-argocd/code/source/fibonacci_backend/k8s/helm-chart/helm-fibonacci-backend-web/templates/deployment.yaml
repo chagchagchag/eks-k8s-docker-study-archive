@@ -40,14 +40,28 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          livenessProbe:
+          startupProbe:
             httpGet:
-              path: /
-              port: http
+              path: /probe/startup
+              port: 8080
+            initialDelaySeconds: 45
+            periodSeconds: 1
+            failureThreshold: 10
           readinessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /probe/ready
+              port: 8080
+            initialDelaySeconds: 45
+            periodSeconds: 1
+            successThreshold: 1
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /probe/live
+              port: 8080
+            initialDelaySeconds: 45
+            periodSeconds: 1
+            failureThreshold: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}
