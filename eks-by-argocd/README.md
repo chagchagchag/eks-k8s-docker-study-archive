@@ -75,9 +75,9 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 
-## Step 3. Backend Application
+## Step 3. backend : `fibonacci-backend`
 
-**모듈/애플리케이션 구조**
+### 모듈/애플리케이션 구조
 
 > - 실무에서 이렇게 대충 구성하지는 않지만 여러개의 deployment (cache, web, batch) 가 통신하는 예제를 위해서 단순하게 구상하다보니 이렇게 되어버림.
 > - cache, web, batch 의 이름이 부자연스러운데 모듈명 이름 짓는 것에 스트레스를 살짝 받아서 일단 이렇게 해둠. 추후 각 모듈들의 이름 변경예정.
@@ -86,7 +86,7 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 <img src="./img/CODE-EXAMPLE/1.png"/>
 
-**자료 구조**
+#### 자료 구조
 
 - 간단한 예제이지만 어느 정도 조금은 구색을 갖춰야 해서 자료구조를 set 하나 정도만 살짝 추가
 
@@ -99,7 +99,7 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 
-**모듈/애플리케이션 역할**
+#### 모듈/애플리케이션 역할
 
 - (작업중. 모듈명 변경 예정) fibonacci-backend-cache
   - 간단한 캐싱레이어.
@@ -122,7 +122,7 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 
-**Redis**
+#### Redis
 
 - 현업에서 Redis 는 보통 클러스터로 구성해서 스탠드 얼론으로 구성하고 전문 운영자가 계시는 경우가 많지만
 - 이번 예제는 실습 용도이기에 로컬 kubernetes default 네임스페이스에서 구동
@@ -135,19 +135,42 @@ alb controller 나 eks 클러스터, IAM, Security Rule 이런 것들을 Cloud F
 
 
 
-## Step 4. Frontend 2 tier Application Dockerfile 구성 및 로컬 테스트
+### Hazelcast (미정. 추후 개발 예정 (v0.0.2 \~))
+> `v0.0.2` 에서 개발 예정
+- 들어온 요청이 처리되지 않았는데 Pod 의 종료를 해야 하는 상황을 기록하는 용도. 
+	- 우아한 종료 시 Offheap 스토리지에 요청 데이터를 저장하는 용도.
+	- DB 에 실패 기록 기능은 이미 준비되어 있는 정상적인 상태라고 가정 
+		- (예제의 단순함을 위해 이번 예제에서는 DB저장 등의 기능은 다루지는 않기로 결정)
+<br>
+
+관련 자료 
+- [Deploying on Kubernetes](https://docs.hazelcast.com/hazelcast/5.3/kubernetes/deploying-in-kubernetes)
+- [Hezelcast for Kubernetes](https://docs.hazelcast.com/tutorials/kubernetes)
+- [Hazelcast Cluster Setup in Kubernetes](https://jet-start.sh/docs/operations/kubernetes)
+- [Hazelcast Cluster Setup in Kubernetes](https://medium.com/microservices-architecture/hazelcast-cluster-setup-in-kubernetes-411ac174ea54)
+- [How to Use Embedded Hazelcast On Kubernetes](https://dzone.com/articles/how-to-use-embedded-hazelcast-on-kubernetes-1)
+<br>
+
+
+
+
+
+## Step 4. frontend : `fibonacci-frontend`
 - 스킵.
 - 2024.3Q에 시작 예정
 
 <br>
 
 
+## Step 5. Helm Chart 작업 (`v0.0.1`)
+- kubectl, yaml 기반 초반 구현체를 Helm Chart 기반으로 구현 작업
+<br>
 
-## Step 5. kustomize 적용
+## Step 6. kustomize 적용 (`v0.0.1`)
+- v0.0.1 
 
 
-
-## Step 6. ArgoCD 적용
+## Step 7. ArgoCD 적용 (`v0.0.1`)
 
 - minikube 환경에서 Argo CD 배포환경 구성 (Github Action, Rollouts, etc)
 - AWS 환경에서 Argo CD 배포환경 구성 (Github Action, Rollouts, etc)
