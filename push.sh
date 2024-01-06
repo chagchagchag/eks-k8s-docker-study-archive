@@ -2,8 +2,8 @@ echo "git add ."
 git add .
 
 echo ""
-echo "git commit -m 'eks with argocd'"
-git commit -m "eks with argocd"
+echo "git commit -m '$1'"
+git commit -m "$1"
 
 echo ""
 echo "git push -u origin main"
