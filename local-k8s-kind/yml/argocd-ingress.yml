@@ -10,9 +10,10 @@ spec:
   - http:
       paths:
       - pathType: Prefix
-        path: /argocd(/|$)(.*)
+        # path: /argocd(/|$)(.*)
+        path: /
         backend:
           service:
-            name: argocd-server
+            name: argocd-server-clusterip
             port:
-              number: 8080
+              number: 9898

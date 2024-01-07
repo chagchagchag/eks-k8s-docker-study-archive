@@ -7,12 +7,16 @@ echo "[install] kubectl apply -f argoprj/argo-cd/.../install.yaml"
 kubectl -n argocd apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 echo ""
-echo "[setup] ingress (argocd-server-ingress)"
+echo "[setup] ingress (argocd-ingress)"
 kubectl -n argocd apply -f argocd-ingress.yml
 
-echo ""
-echo "[setup] nodeport (argocd-server-nodeport)"
-kubectl apply -f argocd-server-nodeport.yml
+# echo ""
+# echo "[setup] nodeport (argocd-server-nodeport)"
+# kubectl apply -f argocd-server-nodeport.yml
+
+# echo ""
+# echo "[setup] cluster ip (argocd-service-clusterip)"
+# kubectl apply -f argocd-service-clusterip.yml
 
 # echo ""
 # echo "[setup] ingress (argocd-server-ingress)"
