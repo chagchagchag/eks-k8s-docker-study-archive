@@ -6,6 +6,8 @@
 
 kind 는 클러스터의 포트를 어떤 포트만 열지를 결정할 수 있다.
 
+오늘 쓰는 문서는 자료 검색 중에 아래의 자료를 보았고 이 내용을 정리하기 위해 글을 쓰기 시작했다.
+
 - [StackOverflow - How to use NodePort with Kind?](https://stackoverflow.com/questions/62432961/how-to-use-nodeport-with-kind)
 
 
