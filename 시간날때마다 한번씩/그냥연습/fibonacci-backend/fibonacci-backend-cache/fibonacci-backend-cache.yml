@@ -1,0 +1,122 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fibonacci
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cache-log-storage-claim
+  namespace: fibonacci
+spec:
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fibonacci-cache-config
+  namespace: fibonacci
+data:
+  language: "ko"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fibonacci-backend-cache-service
+  namespace: fibonacci
+spec:
+  selector:
+    app: fibonacci-backend-cache
+  ports:
+    - protocol: TCP
+      port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fibonacci-ingress
+  namespace: fibonacci
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /fibonacci
+            backend:
+              service:
+                name: fibonacci-backend-cache-service
+                port:
+                  number: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fibonacci-backend-cache-deploy
+  namespace: fibonacci
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: fibonacci-backend-cache
+  template:
+    metadata:
+      labels:
+        app: fibonacci-backend-cache
+    spec:
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: cache-volume
+          emptyDir:
+            medium: Memory
+        - name: log-volume
+          persistentVolumeClaim:
+            claimName: cache-log-storage-claim
+      containers:
+        - name: fibonacci
+          image: chagchagchag/fibonacci-backend-cache:0.0.1
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /fibonacci/logs
+              name: log-volume
+            - mountPath: /fibonacci/cache
+              name: cache-volume
+          env:
+            - name: APP_LANGUAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: fibonacci-cache-config
+                  key: language
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: fibonacci-cache-secret
+                  key: api-key
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh","-c","sleep 10"]
+          readinessProbe:
+            httpGet:
+              path: /probe/healthcheck
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 1
+            successThreshold: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /probe/healthcheck
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 1
+            failureThreshold: 7

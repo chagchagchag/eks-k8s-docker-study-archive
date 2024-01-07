@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fibonacci-backend-cache-deploy
+  namespace: fibonacci
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: fibonacci-backend-cache
+  template:
+    metadata:
+      labels:
+        app: fibonacci-backend-cache
+    spec:
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: cache-volume
+          emptyDir:
+            medium: Memory
+        - name: log-volume
+          persistentVolumeClaim:
+            claimName: cache-log-storage-claim
+      containers:
+        - name: fibonacci
+          image: chagchagchag/fibonacci-backend-cache:0.0.1
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /fibonacci/logs
+              name: log-volume
+            - mountPath: /fibonacci/cache
+              name: cache-volume
+          env:
+            - name: APP_LANGUAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: fibonacci-cache-config
+                  key: language
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: fibonacci-cache-secret
+                  key: api-key
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh","-c","sleep 10"]
+          readinessProbe:
+            httpGet:
+              path: /probe/healthcheck
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 1
+            successThreshold: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /probe/healthcheck
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 1
+            failureThreshold: 7
