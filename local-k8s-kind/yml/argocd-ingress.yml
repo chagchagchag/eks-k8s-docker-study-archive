@@ -16,4 +16,4 @@ spec:
           service:
             name: argocd-server-clusterip
             port:
-              number: 9898
+              number: 443
