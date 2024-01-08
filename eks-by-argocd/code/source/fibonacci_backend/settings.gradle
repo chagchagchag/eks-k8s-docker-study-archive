@@ -1,3 +1,0 @@
-rootProject.name = 'fibonacci_backend'
-include("fibonacci-backend-web")
-include("fibonacci-backend-cache")
