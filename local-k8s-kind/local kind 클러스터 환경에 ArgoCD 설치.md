@@ -140,7 +140,7 @@ $ kubectl apply -f argocd-ingress.yml
 
 
 
-## 패스워드 변경
+## 초기 패스워드
 
 ```bash
 $ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
@@ -159,4 +159,32 @@ NZ2UvgLqQZU6HGtF
 <br>
 
 
+
+## 패스워드 변경
+
+초기 패스워드는 아래 명령을 수행해서 얻을 수 있다.
+
+```bash
+$ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+NZ2UvgLqQZU6HGtF
+```
+
+<br>
+
+
+
+http://localhost:30009 로 접속한다.
+
+좌측 `User Info` 클릭 → `UPDATE PASSWORD` 클릭
+
+<img src="./img/PASSWORD/1.png"/>
+
+<br>
+
+
+
+`Save New Password` 클릭 
+
+<img src="./img/PASSWORD/2.png"/>
 
