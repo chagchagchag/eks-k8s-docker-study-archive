@@ -1,5 +1,13 @@
 ## local kind 클러스터 환경에 ArgoCD 설치
 
+개발용도로 스터디하는 경우 ArgoCD 를 클라우드 환경에 설치하면 일단 EKS 클러스터 비용 자체가 꾸준히 누적되기에 아마도 비용을 아무리 줄이더라도 월 13만원대의 과금을 받을것으로 예상됨.<br>
+
+이 외에도 만약 개발팀 내부의 ArgoCD 에 영향을 주지 않는 선에서 로컬 환경에 격리된 환경을 직접 구축을 해야 할 필요가 있다면 로컬 PC에서 구동시켜두는 것도 어느 정도는 합리적일 수 있기에 kind 클러스터 내에서 ArgoCD 를 설치하는 방법을 정리함.<br>
+
+<Br>
+
+
+
 ## 참고자료
 
 - https://argo-cd.readthedocs.io/en/stable/developer-guide/running-locally/
@@ -27,12 +35,15 @@ nodes:
         node-labels: "ingress-ready=true"
   extraPortMappings:
   - containerPort: 80
-    hostPort: 80
+    hostPort: 30009
     protocol: TCP
-  - containerPort: 443
-    hostPort: 443
-    protocol: TCP
+- role: worker
+- role: worker
+- role: worker
 ```
+
+- containerPort : 클러스터 내부에서는 80 포트를 사용
+- hostPort : 클러스터 외부로는 30009 포트를 노출
 
 <br>
 
@@ -72,7 +83,6 @@ $ kubectl wait --namespace ingress-nginx \
   --selector=app.kubernetes.io/component=controller \
   --timeout=90s
 ...
-
 ```
 
 <br>
@@ -82,37 +92,38 @@ $ kubectl wait --namespace ingress-nginx \
 ## argocd 설치
 
 ```bash
+# namespace
 $ kubectl create namespace argocd
 namespace/argocd created
 
 
-$ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+# 설치
+$ kubectl -n argocd apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 
-$ kubectl get po -n argocd
-NAME                                               READY   STATUS            RESTARTS   AGE
-argocd-application-controller-0                    1/1     Running           0          32s
-argocd-applicationset-controller-dc5c4c965-n6df8   1/1     Running           0          32s
-argocd-dex-server-9769d6499-97c8j                  0/1     PodInitializing   0          32s
-argocd-notifications-controller-db4f975f8-ssn5s    1/1     Running           0          32s
-argocd-redis-b5d6bf5f5-t4gnv                       1/1     Running           0          32s
-argocd-repo-server-579cdc7849-cctjr                0/1     PodInitializing   0          32s
-argocd-server-557c4c6dff-22qt6                     1/1     Running           0          32s
-```
-
-<br>
+# 80 포트 허용
+$ kubectl -n argocd patch deployment argocd-server --type json -p='[{"op":"replace","path":"/spec/template/spec/containers/0/args","value":["/usr/local/bin/argocd-server","--insecure"]}]'
 
 
+# 설치 상태 확인
+$ kubectl -n argocd get all
 
-## host 파일 수정
 
-`C:\Windows\System32\drivers\etc\hosts` 파일을 메모장으로 열어서 아래의 내용을 추가해준다.
+# 45 초 대기 (argocd 구동이 꽤 리소스를 많이 잡아먹기에 어느 정도는 기다려야 함)
+$ sleep 45
 
-```txt
-# ...
 
-# 추가해준 내용
-127.0.0.1	argocd-server.local
+# 초기 비밀번호
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+
+# 45 초 대기 (모든 Pod 들이 다 뜨는 시간은 최소 70s 이기에 넉넉하게 45초 대기)
+$ sleep 45
+
+
+# ingress 설정
+# `argocd-cluster` 로 / 으로 온 요청은 443 으로 포워딩
+$ kubectl apply -f argocd-ingress.yml
 ```
 
 <br>
@@ -133,9 +144,7 @@ NZ2UvgLqQZU6HGtF
 
 ## 접속
 
-[http://argocd-server.local](http://argocd-server.local) 으로 접속한다.
-
-그리고 비밀번호를 변경해준다. 접속 사용자 명은 `admin` 이고 비밀번호는 위에서 얻은 패스워드를 통해 접속 후 비밀번호를 변경해주면 된다.
+- http://localhost:30009 로 접속한다.
 
 <br>
 
