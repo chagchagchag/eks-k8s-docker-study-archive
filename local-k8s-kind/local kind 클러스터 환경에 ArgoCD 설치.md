@@ -8,6 +8,16 @@
 
 
 
+## 참고 (예제소스)
+
+아래의 모든 내용들은 setup.sh 라는 파일로 정의해두었고 이 쉘스크립트 하나만 다돌리면 모두 해결된다. 사용법은 아래 디렉터리에 따로 정리해둠.
+
+- [https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/local-k8s-kind/yml](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/local-k8s-kind/yml)
+
+<br>
+
+
+
 ## 참고자료
 
 - https://argo-cd.readthedocs.io/en/stable/developer-guide/running-locally/
