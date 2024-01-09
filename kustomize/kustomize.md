@@ -92,6 +92,20 @@ cross-cutting 은 아래의 두가지 주요 기능들이 있다.
 
 
 
+## Base/Overlays
+
+<br>
+
+
+
+## Helm 으로 마이그레이션
+
+별도의 문서에 따로 정리할 예정.<br>
+
+<br>
+
+
+
 ## 주요 명령어
 
 kubectl kustomize `[디렉터리]`
@@ -390,3 +404,8 @@ kustomize 의 cross-cutting 은 아래의 두가지 주요 기능들을 지원�
 #### eg 5.2) 연관관계에 있는 다른 필드들도 일괄 업데이트
 
 ... 
+
+
+
+### eg 6\) Base/Overlay
+
