@@ -6,6 +6,7 @@
   - [Kustomize - kubectl.docs.kubernetes.io](https://kubectl.docs.kubernetes.io/references/kustomize/)
   - [Guides - kubectl.docs.kubernetes.io/guides](https://kubectl.docs.kubernetes.io/guides/)
   - [Commands - kubectl.docs.kubernetes.io](https://kubectl.docs.kubernetes.io/references/kustomize/cmd/)
+  - [The Kustomization File - kubectl.docs.kubernetes.io](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/)
 - [kustomize.io - https://kustomize.io/](https://kustomize.io/)
 - [malwareanalysis.tistory.com/402](https://malwareanalysis.tistory.com/402)
 
@@ -47,7 +48,7 @@ kustomize 에서는 helm chart 를 가져올수 있고 kustomize 기능을 수�
 
 
 
-## 주요 필드
+## 주요 필드, 개념
 
 kustomize 는 핵심적인 4 종류의 필드가 있다. kustomize 수행 시에 resources → generators → transformers → validator 순으로 수행된다. 
 
@@ -66,6 +67,26 @@ kustomize 는 핵심적인 4 종류의 필드가 있다. kustomize 수행 시에
   - 이 외에도 다양한 플러그인이 있기에 직접 공식문서인 [kubectl.docs.kubernetes.io 레퍼런스](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/) 를 찾아보는 것을 추천한다. 
 - validators
   - 검증 및 밸리데이션 작업을 수행
+
+<br>
+
+
+
+## cross-cutting
+
+kustomize 에서는 cross-cutting 이라고 하는 개념들을 지원한다. 
+
+cross-cutting 은 아래의 두가지 주요 기능들이 있다.
+
+- 연관관계에 있는 다른 필드들도 일괄 업데이트
+- commonAnntations, commonLabels 등 복수개의 하위 필드를 동시에 가리켜야 하는 경우 하위 항목들 일괄 업데이트
+  - commonLabels, commonAnnotations 에 지정한 데이터로  yaml 상의 label, annotation 에 해당되는 두 필드를 함께 적용
+  - e.g. label
+    - metadata의 label 은 수정했는데, spec.selector.matchLabels, template.metadata.labels 를 수정하지 않아서 생기는 오류를 방지할 수 있다.
+    - 또는 그 반대의 경우를 방지할 수 있다.
+  - e.g. annotation
+    - metadata 의 annotation 은 수정했는데, spec.template.metadata.annotation 을 수정하지 않아서 생기는 오류를 방지할 수 있다.
+    - 또는 그 반대의 경우를  방지할 수 있다.
 
 <br>
 
@@ -346,3 +367,26 @@ spec:
 
 ### eg 5) cross-cutting
 
+kustomize 의 cross-cutting 은 아래의 두가지 주요 기능들을 지원한다.
+
+- commonAnntations, commonLabels 등 복수개의 하위 필드를 동시에 가리켜야 하는 경우 하위 항목들 일괄 업데이트
+- 연관관계에 있는 다른 필드들도 일괄 업데이트 
+
+
+
+편의상 위의 두가지를 아래와 같이 부르기로 했다.
+
+- commonAnnotations, commonLabels 등이 가리키는 하위필드 일괄업데이트
+- 연관관계에 있는 다른 필드들도 함께 수정
+
+
+
+#### eg 5.1) commonAnnotations, commonLabels 등이 가리키는 하위필드 일괄 업데이트
+
+...
+
+
+
+#### eg 5.2) 연관관계에 있는 다른 필드들도 일괄 업데이트
+
+... 
