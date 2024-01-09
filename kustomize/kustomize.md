@@ -33,3 +33,16 @@ kustomization.yml 파일에는 kustomize 실행시 어떤 필드를 재정의할
 
 
 
+## Helm vs Kustomize
+
+helm 은 템플릿 기반이다. kustomize 는 kubectl 내장 기능을 통해 이미지를 덮어쓰거나 이런 것이 가능하다. helm, kustomize 모두 운영/개발 환경 등에 적합하게 이미지를 바꿔서 적용하는 것이 가능하다. <br>
+
+helm 의 경우에는 소프트웨어 개발 팀이 선호하는 편이고 kustomize 는 데브옵스 쪽에서 선호하는 편이다.<br>
+
+<br>
+
+
+
+## 주요 예제
+
+...
