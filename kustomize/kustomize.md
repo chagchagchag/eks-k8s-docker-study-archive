@@ -23,7 +23,7 @@ kustomization.yml 은 kustomize 가 실행될 때 어떤 필드를 재정의 할
 
 kustomization.yml 파일에는 kustomize 실행시 어떤 필드를 재정의할지를 적어둔다. 원래 작성한 yml 파일이 있는데, kustomization.yml 파일내에 재정의한 값이 있다면 원래 값을 재정의 한 값으로 덮어쓰게 된다. <br>
 
-쿠버네티스 자료들 전반적으로 overlay 라는 용어가 굉장히 많이 쓰이는데, 원래 정의해둔 기본 이미지 위에 새로운 이미지를 덮어서 올려놓듯 overlay 라는 용어는 기존 이미지 파일의 내용은 그대로 한 채로 새로 적용한 이미지 파일에서 바뀐부분만 업데이트 하는 것을 의미한다. 이렇게 overlay 하는 것의 장점은 매번 같은 내용이 적용되어야 하는 base 매니페스트 yml 파일을 두고 세세하게 달라지는 부분은 kustomization 을 통해 필요한 부분만 재정의 할 수 있다는 장점이 있다.<br>
+쿠버네티스 자료들 전반적으로 overlay 라는 용어가 굉장히 많이 쓰이는데, 원래 정의해둔 기본 이미지 위에 새로운 이미지를 덮어서 올려놓듯 overlay 라는 용어는 기본 이미지 파일(base.yml)의 내용은 그대로 한 채로 새로 적용한 이미지 파일에서 바뀐부분만 업데이트 하는 것을 의미한다. 이렇게 overlay 하는 것의 장점은 매번 같은 내용이 적용되어야 하는 base.yml 매니페스트 파일을 두고 세세하게 달라지는 부분은 kustomization.yml 을 통해 필요한 부분만 재정의 할 수 있다는 장점이 있다.<br>
 
 또 한가지 장점은 배포환경마다 kustomization.yml 파일만 확인하면 어느부분이 달라지는지 정확하게 확인할 수 있다는 점이다.<br>
 
@@ -53,10 +53,13 @@ kustomize 는 핵심적인 4 종류의 필드가 있다. kustomize 수행 시에
 - generators
   - 새로운 쿠버네티스 리소스/필드 를 생성해서 지정하는 필드
   - e.g. configmap, secret 등을 생성하는 데에 사용 
-  - 빌트인으로 제공되는 플러그인(built-in Generators) 으로 [ConfigMapGenerator](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_configmapgenerator_), [SecretGenerator](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_configmapgenerator_), [HelmChartInflationGenerator](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_helmchartinflationgenerator_) 등이 있다.
+  - 빌트인으로 제공되는 플러그인(built-in Generators) 으로 [ConfigMapGenerator](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_configmapgenerator_), [SecretGenerator](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_configmapgenerator_), [HelmChartInflationGenerator](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_helmchartinflationgenerator_) 등이 있다. 
+  - 이 외에도 다양한 플러그인이 있기에 직접 공식문서인 [kubectl.docs.kubernetes.io 레퍼런스](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/) 를 찾아보는 것을 추천한다. 
 - transformers
   - 필드의 값을 변경할 때 사용하는 개념
   - e.g. newName, newTag
+  - 빌트인으로 제공되는 플러그인(built-in Transformers) 로 [LabelTransformer](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_labeltransformer_) , [NamespaceTransformer](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_namespacetransformer_), [ImageTagTransformer](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_namespacetransformer_) 등이 있다. 
+  - 이 외에도 다양한 플러그인이 있기에 직접 공식문서인 [kubectl.docs.kubernetes.io 레퍼런스](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/) 를 찾아보는 것을 추천한다. 
 - validators
   - 검증 및 밸리데이션 작업을 수행
 
@@ -195,4 +198,141 @@ metadata:
 
 
 
-### eg 3\) 
+### eg 3\) ConfigMapGenerator 가 생성한 configMap 을 Pod 에 지정
+
+kustomization.yml
+
+```yaml
+resources:
+  - deployment.yml
+configMapGenerator:
+- name: configmap-eg3
+  files:
+    - data.properties
+```
+
+deployment.yml
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eg3-deployment
+spec:
+  selector:
+    matchLabels:
+      app: eg3-deployment
+  template:
+    metadata:
+      labels:
+        app: eg3-deployment
+    spec:
+      containers:
+      - name: eg3-deployment
+        image: nginx
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        configMap:
+          name: configmap-eg3
+```
+
+
+
+이제 한번 kustomize 를 수행해보자.
+
+```bash
+$ kubectl kustomize ./
+apiVersion: v1
+data:
+  data.properties: message=안녕하세요.
+kind: ConfigMap
+metadata:
+      app: eg3-deployment
+  template:
+    metadata:
+      labels:
+        app: eg3-deployment
+    spec:
+      containers:
+      - image: nginx
+        name: eg3-deployment
+        volumeMounts:
+        - mountPath: /config
+          name: config
+      volumes:
+      - configMap:
+          name: configmap-eg3-bk7m2kd7f4 # 이부분에 실제 configMap 의 이름이 바인딩되었다.
+        name: config
+```
+
+<br>
+
+
+
+### eg 4\) Transformers 를 이용해 이미지 이름, 태그 명 수정되게끔 하기
+
+[ImageTagTransformer](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_namespacetransformer_) 를 어떻게 사용하는지 확인하는 예제다. 어렵지 않아요.
+
+<br>
+
+pod.yml
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jdk
+  labels:
+    name: jdk
+spec:
+  containers:
+  - name: jdk
+    image: amazoncorretto:17
+    resources:
+      limits:
+        memory: "64Mi"
+        cpu: "100m"
+```
+
+<br>
+
+
+
+kustomization.yml
+
+```yaml
+resources:
+  - pod.yml
+images:
+  - name: amazoncorretto
+    newName: amazoncorretto
+    newTag: 21.0.1
+```
+
+<br>
+
+
+
+이렇게 작성한 결과를 kustomize 해보면 아래와 같이 `amazoncorretto:21.0.1` 로 반영되어 있는 것을 확인 가능하다. 분명 pod.yml 에는 `amazoncorretto:17` 로 명시했지만, 배포시에 커스텀하게 kustomize 하는 kustomization.yml 내에는 `amazoncorretto:21.0.1` 을 사용하게 정의했기 때문에 kustomization.yml 에 명시한 이미지의 버전으로 오버레이 되었음을 확인 가능하다.
+
+```bash
+$ kubectl kustomize ./
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: jdk
+  name: jdk
+spec:
+  containers:
+  - image: amazoncorretto:21.0.1
+    name: jdk
+    resources:
+      limits:
+        cpu: 100m
+        memory: 64Mi
+```
+
