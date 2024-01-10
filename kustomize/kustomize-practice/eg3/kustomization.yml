@@ -1,0 +1,6 @@
+resources:
+  - deployment.yml
+configMapGenerator:
+- name: configmap-eg3
+  files:
+    - data.properties

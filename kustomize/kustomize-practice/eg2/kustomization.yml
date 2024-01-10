@@ -1,0 +1,4 @@
+configMapGenerator:
+- name: configmap-eg2
+  files:
+    - data.properties

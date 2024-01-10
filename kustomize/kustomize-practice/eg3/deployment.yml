@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eg3-deployment
+spec:
+  selector:
+    matchLabels:
+      app: eg3-deployment
+  template:
+    metadata:
+      labels:
+        app: eg3-deployment
+    spec:
+      containers:
+      - name: eg3-deployment
+        image: nginx
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        configMap:
+          name: configmap-eg3

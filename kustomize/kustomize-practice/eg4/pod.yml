@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jdk
+  labels:
+    name: jdk
+spec:
+  containers:
+  - name: jdk
+    image: amazoncorretto:17
+    resources:
+      limits:
+        memory: "64Mi"
+        cpu: "100m"

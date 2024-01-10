@@ -1,0 +1,6 @@
+resources:
+  - pod.yml
+images:
+  - name: amazoncorretto
+    newName: amazoncorretto
+    newTag: 21.0.1
