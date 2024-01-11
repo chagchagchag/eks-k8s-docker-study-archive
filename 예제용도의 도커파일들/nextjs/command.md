@@ -1,6 +1,7 @@
 ## 참고자료
 
 - [Dockerize a Next.js App](https://medium.com/@2018.itsuki/dockerize-a-next-js-app-4b03021e084d)
+- [How to yarn build on Dockerfile](https://stackoverflow.com/questions/74222441/how-to-yarn-build-on-dockerfile)
 
 <br>
 
