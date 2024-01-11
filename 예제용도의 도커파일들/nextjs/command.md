@@ -2,6 +2,7 @@
 
 - [Dockerize a Next.js App](https://medium.com/@2018.itsuki/dockerize-a-next-js-app-4b03021e084d)
 - [How to yarn build on Dockerfile](https://stackoverflow.com/questions/74222441/how-to-yarn-build-on-dockerfile)
+- [Docker 기본 (4/8) docker build & push](https://medium.com/dtevangelist/docker-%EA%B8%B0%EB%B3%B8-4-8-docker-build-push-71d740c1d629)
 
 <br>
 
@@ -132,6 +133,24 @@ CMD npm run dev
 
 ```bash
 $ docker build -t nextjs-app-ts .
+```
+
+<br>
+
+docker hub 이미지로 빌드할 것이라면 아래와 같이하자
+
+```bash
+$ docker build -t chagchagchag/nextjs-app-ts:v0.0.1 .
+```
+
+<br>
+
+
+
+## Docker image push
+
+```bash
+$ docker push chagchagchag/nextjs-app-ts:v0.0.1
 ```
 
 <br>
