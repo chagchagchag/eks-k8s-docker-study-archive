@@ -61,6 +61,8 @@ nodes:
 
 클러스터 생성
 
+- 위에서 작성한 클러스터 설정 yml 파일을 기반으로 argocd-cluster 라는 이름의 kind 클러스터를 생성한다.
+
 ```bash
 $ kind create cluster --name argocd-cluster --config=argocd-cluster.yml
 Creating cluster "argocd-cluster" ...

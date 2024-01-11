@@ -92,7 +92,7 @@ kubectl wait --namespace ingress-nginx \
 
 
 
-## 쉘스크립트
+## 쉘 스크립트
 
 내 경우에는 클러스터 생성, 인그레스 컨트롤러(nginx-ingress) 설치 하는 명령어를 쉘스크립트로 만들어두었다.
 
