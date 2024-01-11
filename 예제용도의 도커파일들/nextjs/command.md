@@ -1,3 +1,11 @@
+## 참고자료
+
+- [Dockerize a Next.js App](https://medium.com/@2018.itsuki/dockerize-a-next-js-app-4b03021e084d)
+
+<br>
+
+
+
 ## 참고
 
 next.js 는 Node 18.14.1 이상부터 동작
@@ -31,7 +39,7 @@ $ nvm ls
     20.10.0
   * 16.20.2 (Currently using 64-bit executable)
 
-## 20.10.0 이 이미 설치되어 있으니 설치
+## 20.10.0 이 이미 설치되어 있으니 사용
 $ nvm use 20.10.0
 Now using node v20.10.0 (64-bit)
 ```
@@ -71,9 +79,119 @@ $ yarn dev
 $ npm run dev
 ```
 
+<br>
 
 
 
+## Dockerfile
+
+```dockerfile
+FROM node:18-alpine as base
+RUN apk add --no-cache g++ make py3-pip libc6-compat
+WORKDIR /app
+COPY package*.json ./
+EXPOSE 3000
+
+FROM base as builder
+WORKDIR /app
+COPY . .
+RUN npm run build
+
+
+FROM base as production
+WORKDIR /app
+
+ENV NODE_ENV=production
+RUN npm ci
+
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+USER nextjs
+
+
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/public ./public
+
+CMD npm start
+
+FROM base as dev
+ENV NODE_ENV=development
+RUN npm install 
+COPY . .
+CMD npm run dev
+```
+
+<br>
+
+
+
+## Dockerfile 빌드
+
+```bash
+$ docker build -t nextjs-app-ts .
+```
+
+<br>
+
+
+
+## 컨테이너 구동 
+
+3000 번 포트 구동
+
+```bash
+$ docker container run --rm -d -p 3000:3000 nextjs-app-ts
+```
+
+확인 : [http://localhost:3000](http://localhost:3000)
+
+<br>
+
+
+
+3001 번 포트 구동
+
+포트를 다르게 해서 구동하고 싶다면 아래와 같이 수행한다.
+
+```bash
+$ docker container run --rm -d -p 3001:3000 nextjs-app-ts
+```
+
+확인 : [http://localhost:3001](http://localhost:3001)
+
+<br>
+
+
+
+만약 컨테이너를 종료시킨 다음에도 이미지를 유지하고 싶다면 --rm 옵션을 빼고 아래와 같이 수행
+
+```bash
+$ docker container run -d -p 3000:3000 nextjs-app-ts
+```
+
+확인 : [http://localhost:3000](http://localhost:3000)
+
+<br>
+
+
+
+만약 데몬으로 띄우지 않고 front로 돌려서 로그도 같이보고 싶다면 아래와 같이 수행
+
+```bash
+$ docker container run -p 3000:3000 nextjs-app-ts
+```
+
+확인 : [http://localhost:3000](http://localhost:3000)
+
+<br>
+
+
+
+## docker-compose
+
+이건 나중에 진행.
 
 
 
