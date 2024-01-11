@@ -397,7 +397,99 @@ kustomize 의 cross-cutting 은 아래의 두가지 주요 기능들을 지원�
 
 #### eg 5.1) commonAnnotations, commonLabels 등이 가리키는 하위필드 일괄 업데이트
 
-...
+deployment.yml
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs-myapp
+spec:
+  selector:
+    matchLabels:
+      app: nextjs-myapp
+  template:
+    metadata:
+      labels:
+        app: nextjs-myapp
+    spec:
+      containers:
+      - name: nextjs-myapp
+        image: chagchagchag/nextjs-app-ts:v0.0.1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+
+```
+
+<br>
+
+
+
+kustomization.yml
+
+```yaml
+namespace: nextjs-myapp
+namePrefix: dev-
+nameSuffix: "-Rev01"
+commonLabels:
+  app: nextjs-myapp-typescript
+commonAnnotations:
+  gogogo: "홍진호 우승인가요?"
+resources:
+  - deployment.yml
+```
+
+<br>
+
+
+
+kustomize 명령 수행을 통해 kustomization 실행시 어떻게 빌드되는지 확인
+
+-  변경된 부분은 아래 코드의 주석 `1)`, `2)` , `3)`, `4)` 으로 표시해두었다. 
+
+```bash
+$ kubectl kustomize ./
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    ## 1)
+    gogogo: 홍진호 우승인가요?  ## commonAnnotations.gogogo
+  labels:
+    ## 2) 
+    app: nextjs-myapp-typescript ## commonLabels.app = nextjs-myapp-typescript
+  name: dev-nextjs-myapp-Rev01 ## 3), 4)
+  namespace: nextjs-myapp
+spec:
+  selector:
+    matchLabels:
+      ## 2)
+      app: nextjs-myapp-typescript ## commonLabels.app = nextjs-myapp-typescript
+  template:
+    metadata:
+      annotations:
+        ## 1)
+        gogogo: 홍진호 우승인가요? ## commonAnnotations.gogogo
+      labels:
+        ## 2)
+        app: nextjs-myapp-typescript ## commonLabels.app = nextjs-myapp-typescript
+    spec:
+      containers:
+      - image: chagchagchag/nextjs-app-ts:v0.0.1
+        name: nextjs-myapp
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+```
+
+<br>
 
 
 

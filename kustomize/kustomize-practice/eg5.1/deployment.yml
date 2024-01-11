@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs-myapp
+spec:
+  selector:
+    matchLabels:
+      app: nextjs-myapp
+  template:
+    metadata:
+      labels:
+        app: nextjs-myapp
+    spec:
+      containers:
+      - name: nextjs-myapp
+        image: chagchagchag/nextjs-app-ts:v0.0.1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
