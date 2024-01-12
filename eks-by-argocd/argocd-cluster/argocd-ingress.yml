@@ -1,0 +1,20 @@
+# 참고자료 : https://kind.sigs.k8s.io/docs/user/ingress/#using-ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-ingress
+  namespace: argocd
+  # annotations:
+    # nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        # path: /argocd(/|$)(.*)
+        path: /
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 443
