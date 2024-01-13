@@ -1,13 +1,26 @@
----
 apiVersion: v1
 kind: Namespace
 metadata:
   name: nextjs-myapp
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextjs-myapp-service
+  namespace: nextjs-myapp
+spec:
+  # type: ClusterIP
+  selector:
+    app: nextjs-myapp
+  ports:
+  - protocol: TCP
+    port: 3000
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nextjs-myapp
+  namespace: nextjs-myapp
 spec:
   selector:
     matchLabels:
@@ -20,9 +33,10 @@ spec:
       containers:
       - name: nextjs-myapp
         image: chagchagchag/nextjs-app-ts:v0.0.1
+        imagePullPolicy: Always
         resources:
           limits:
-            memory: "128Mi"
+            memory: "512Mi"
             cpu: "500m"
-        ports:
-        - containerPort: 3000
+        # ports:
+        # - containerPort: 3000

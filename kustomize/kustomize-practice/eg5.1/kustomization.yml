@@ -6,4 +6,5 @@ commonLabels:
 commonAnnotations:
   gogogo: "홍진호 우승인가요?"
 resources:
-  - deployment.yml
+  - nextjs-myapp.yml
+  - nextjs-ingress.yml
