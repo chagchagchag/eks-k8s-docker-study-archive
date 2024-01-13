@@ -499,9 +499,206 @@ spec:
 
 cross-cutting 은 연관관계에 있는 다른 필드들도 일괄 업데이트한다.<br>
 
-예를 들어서 ingress 가 service name 을 참조하고 있을 때 kustomize 명령 수행시 service name 이 변경되면 ingress 내에서 참조하는 service name 역시도 kustomize 가 바꿔주는 기능을 의미한다.
+예를 들어서 ingress 가 service name 을 참조하고 있을 때 kustomize 명령 수행시 service name 이 변경되면 ingress 내에서 참조하는 service name 역시도 kustomize 가 바꿔주는 기능을 의미한다.<br>
+
+예제는 아래와 같다. 출력결과만 추가하고 설명은 생략하기로 했다.<br>
 
 
+
+`kustomization.yml`
+
+```yaml
+namespace: nextjs-3000-develop
+namePrefix: dev-
+nameSuffix: "-2024.01.13"
+commonLabels:
+  app: nextjs-2024
+commonAnnotations:
+  gogogo: "홍진호 우승인가요?"
+resources:
+  - nextjs-myapp.yml
+  - nextjs-service.yml
+  - nextjs-ingress.yml
+```
+
+<br>
+
+
+
+`nextjs-ingress.yml`
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nextjs-ingress
+  namespace: nextjs-3000
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: nextjs-myapp-service
+            port:
+              number: 3000
+```
+
+<br>
+
+
+
+`nextjs-service.yml`
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextjs-myapp-service
+  # namespace: nextjs-3000
+spec:
+  # type: ClusterIP
+  selector:
+    app: nextjs-myapp
+  ports:
+    - protocol: TCP
+      port: 3000
+```
+
+<br>
+
+
+
+`nextjs-myapp.yml`
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nextjs-3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs-myapp
+  namespace: nextjs-3000
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nextjs-myapp
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: nextjs-myapp
+    spec:
+      containers:
+      - name: nextjs-myapp
+        image: chagchagchag/nextjs-app-ts:v0.0.1
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 3000
+            protocol: TCP
+        # resources:
+        #   limits:
+        #     memory: "512Mi"
+        #     cpu: "500m"
+        # ports:
+        # - containerPort: 3000
+
+```
+
+<br>
+
+
+
+출력결과
+
+```bash
+$ kubectl kustomize ./
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024
+  name: nextjs-3000-develop
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024
+  name: dev-nextjs-myapp-service-2024.01.13
+  namespace: nextjs-3000-develop
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+  selector:
+    app: nextjs-2024
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024
+  name: dev-nextjs-myapp-2024.01.13
+  namespace: nextjs-3000-develop
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nextjs-2024
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        gogogo: 홍진호 우승인가요?
+      labels:
+        app: nextjs-2024
+    spec:
+      containers:
+      - image: chagchagchag/nextjs-app-ts:v0.0.1
+        imagePullPolicy: Always
+        name: nextjs-myapp
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024
+  name: dev-nextjs-ingress-2024.01.13
+  namespace: nextjs-3000-develop
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: dev-nextjs-myapp-service-2024.01.13
+            port:
+              number: 3000
+        path: /
+        pathType: Prefix
+```
+
+<br>
 
 
 
