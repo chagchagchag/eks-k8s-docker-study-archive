@@ -703,4 +703,237 @@ spec:
 
 ### eg 6\) Base/Overlay
 
-이번 내용은 설명하기에는 몸이 피곤해서 일단은 예제만 남겨두기로 했다.
+이번 내용은 설명하기에는 몸이 피곤해서 일단은 예제만 남겨두기로 했다.<br>
+
+develop, production 이렇게 두개의 환경이 있는데, develop, production 마다 달라지는 부분은 namsepse,  name 달라지도록 해서 구성했다.<br>
+
+`overlay/develop/kustomization.yml`
+
+```yaml
+namespace: nextjs-3000-develop
+# bases:
+#   - ../../base # bases 옵션은 deprecated 되었고, resources 를 쓰는 것이 권장된다.
+resources:
+  - ../../base
+commonLabels:
+  app: nextjs-2024-develop
+```
+
+<br>
+
+
+
+`overlay/production/kustomization.yml`
+
+```yaml
+namespace: nextjs-3000-production
+# bases:
+#   - ../../base # bases 옵션은 deprecated 되었고, resources 를 쓰는 것이 권장된다.
+resources:
+  - ../../base
+commonLabels:
+  app: nextjs-2024-production
+```
+
+<br>
+
+
+
+그리고 base 라는 디렉터리를 따로 두었는데 몸이 아픈 관계로 스샷만 남겨둬야겠다. 예제의 내용은 예제 5.2\) 의 내용 그대로 복사해둔 내용이다.
+
+<img src="./img/2.png"/>
+
+<br>
+
+#### Base/Overlay 기능을 통해 develop 버전의 매니페스트 생성
+
+위와 같이 작성해둔 예제 5\) 의 next.js 예제를 토대로 develop 버전의 매니페스트, develop 버전의 매니페스트를 만드는 실습을 해보자.
+
+먼저 kustomize 명령을 통해 develop 버전의 매니페스트를 만드는 과정을 확인해보자.
+
+- metadata.labels.app: nextjs-2024-develop
+- spec.selector.matchLabels.app: nextjs-2024-develop
+- namespace = nextjs-3000-develop
+
+으로 변경되어 있는 것을 아래에서 확인 가능하다.
+
+```bash
+$ cd overlay/develop
+
+$ kubectl kustomize ./
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024-develop
+  name: nextjs-3000-develop
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024-develop
+  name: dev-nextjs-myapp-service-2024.01.13
+  namespace: nextjs-3000-develop
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+  selector:
+    app: nextjs-2024-develop
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024-develop
+  name: dev-nextjs-myapp-2024.01.13
+  namespace: nextjs-3000-develop
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nextjs-2024-develop
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        gogogo: 홍진호 우승인가요?
+      labels:
+        app: nextjs-2024-develop
+    spec:
+      containers:
+      - image: chagchagchag/nextjs-app-ts:v0.0.1
+        imagePullPolicy: Always
+        name: nextjs-myapp
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024-develop
+  name: dev-nextjs-ingress-2024.01.13
+  namespace: nextjs-3000-develop
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: dev-nextjs-myapp-service-2024.01.13
+            port:
+              number: 3000
+        path: /
+        pathType: Prefix
+```
+
+<br>
+
+
+
+#### Base/Overlay 기능을 통해 production 버전의 매니페스트 생성
+
+이번에는 production 버전의 매니페스트를 생성한다.
+
+위에서 작성해둔 예제 5\) 의 next.js 예제를 토대로 production 버전의 매니페스트, production 버전의 매니페스트를 만드는 실습을 해보자.
+
+먼저 kustomize 명령을 통해 production 버전의 매니페스트를 만드는 과정을 확인해보자.
+
+- metadata.labels.app: nextjs-2024-production
+- spec.selector.matchLabels.app: nextjs-2024-production
+- namespace = nextjs-3000-production
+
+으로 변경되어 있는 것을 아래에서 확인 가능하다.
+
+```bash
+$ kubectl kustomize ./
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024-production
+  name: nextjs-3000-production
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024-production
+  name: dev-nextjs-myapp-service-2024.01.13
+  namespace: nextjs-3000-production
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+  selector:
+    app: nextjs-2024-production
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024-production
+  name: dev-nextjs-myapp-2024.01.13
+  namespace: nextjs-3000-production
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nextjs-2024-production
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        gogogo: 홍진호 우승인가요?
+      labels:
+        app: nextjs-2024-production
+    spec:
+      containers:
+      - image: chagchagchag/nextjs-app-ts:v0.0.1
+        imagePullPolicy: Always
+        name: nextjs-myapp
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    gogogo: 홍진호 우승인가요?
+  labels:
+    app: nextjs-2024-production
+  name: dev-nextjs-ingress-2024.01.13
+  namespace: nextjs-3000-production
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: dev-nextjs-myapp-service-2024.01.13
+            port:
+              number: 3000
+        path: /
+        pathType: Prefix
+```
+
