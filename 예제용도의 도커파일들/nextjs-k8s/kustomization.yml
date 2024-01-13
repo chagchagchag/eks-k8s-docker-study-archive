@@ -1,0 +1,10 @@
+namespace: nextjs-3000-develop
+namePrefix: dev-
+nameSuffix: "-01"
+commonLabels:
+  app: nextjs-myapp-typescript
+commonAnnotations:
+  gogogo: "홍진호 우승인가요?"
+resources:
+  - nextjs-myapp.yml
+  - nextjs-ingress.yml
