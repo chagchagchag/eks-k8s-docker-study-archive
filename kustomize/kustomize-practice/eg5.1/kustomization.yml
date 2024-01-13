@@ -1,4 +1,4 @@
-namespace: nextjs-myapp
+namespace: nextjs-3000-develop
 namePrefix: dev-
 nameSuffix: "-01"
 commonLabels:

@@ -392,8 +392,8 @@ kustomize 의 cross-cutting 은 아래의 두가지 주요 기능들을 지원�
 
 편의상 위의 두가지를 아래와 같이 부르기로 했다.
 
-- commonAnnotations, commonLabels 등이 가리키는 하위필드 일괄업데이트
-- 연관관계에 있는 다른 필드들도 함께 수정
+- commonAnnotations, commonLabels 등이 가리키는 하위필드 일괄 업데이트
+- 연관관계에 있는 다른 필드들도 일괄 업데이트
 
 
 
@@ -497,7 +497,11 @@ spec:
 
 #### eg 5.2) 연관관계에 있는 다른 필드들도 일괄 업데이트
 
-... 
+cross-cutting 은 연관관계에 있는 다른 필드들도 일괄 업데이트한다.<br>
+
+예를 들어서 ingress 가 service name 을 참조하고 있을 때 kustomize 명령 수행시 service name 이 변경되면 ingress 내에서 참조하는 service name 역시도 kustomize 가 바꿔주는 기능을 의미한다.
+
+
 
 
 
