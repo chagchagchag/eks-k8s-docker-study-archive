@@ -705,6 +705,8 @@ spec:
 
 이번 내용은 설명하기에는 몸이 피곤해서 일단은 예제만 남겨두기로 했다.<br>
 
+예제의 모든 내용은 [깃헙 (chagchagchag/eks-k8s-docker-study-archive/kustomize/kustomize-practice/eg6)](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg6) 에 정리해두었다.<br>
+
 develop, production 이렇게 두개의 환경이 있는데, develop, production 마다 달라지는 부분은 namsepse,  name 달라지도록 해서 구성했다.<br>
 
 `overlay/develop/kustomization.yml`
