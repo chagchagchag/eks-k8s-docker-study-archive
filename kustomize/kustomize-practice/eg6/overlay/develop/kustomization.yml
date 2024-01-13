@@ -1,0 +1,7 @@
+namespace: nextjs-3000-develop
+# bases:
+#   - ../../base # bases 옵션은 deprecated 되었고, resources 를 쓰는 것이 권장된다.
+resources:
+  - ../../base
+commonLabels:
+  app: nextjs-2024-develop

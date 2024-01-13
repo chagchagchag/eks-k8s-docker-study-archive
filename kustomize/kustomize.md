@@ -508,7 +508,7 @@ cross-cutting 은 연관관계에 있는 다른 필드들도 일괄 업데이트
 `kustomization.yml`
 
 ```yaml
-namespace: nextjs-3000-develop
+namespace: nextjs-3000-base
 namePrefix: dev-
 nameSuffix: "-2024.01.13"
 commonLabels:
@@ -627,7 +627,7 @@ metadata:
     gogogo: 홍진호 우승인가요?
   labels:
     app: nextjs-2024
-  name: nextjs-3000-develop
+  name: nextjs-3000-base
 ---
 apiVersion: v1
 kind: Service
@@ -637,7 +637,7 @@ metadata:
   labels:
     app: nextjs-2024
   name: dev-nextjs-myapp-service-2024.01.13
-  namespace: nextjs-3000-develop
+  namespace: nextjs-3000-base
 spec:
   ports:
   - port: 3000
@@ -653,7 +653,7 @@ metadata:
   labels:
     app: nextjs-2024
   name: dev-nextjs-myapp-2024.01.13
-  namespace: nextjs-3000-develop
+  namespace: nextjs-3000-base
 spec:
   replicas: 2
   selector:
@@ -684,7 +684,7 @@ metadata:
   labels:
     app: nextjs-2024
   name: dev-nextjs-ingress-2024.01.13
-  namespace: nextjs-3000-develop
+  namespace: nextjs-3000-base
 spec:
   rules:
   - http:
@@ -695,7 +695,6 @@ spec:
             port:
               number: 3000
         path: /
-        pathType: Prefix
 ```
 
 <br>
@@ -704,3 +703,4 @@ spec:
 
 ### eg 6\) Base/Overlay
 
+이번 내용은 설명하기에는 몸이 피곤해서 일단은 예제만 남겨두기로 했다.
