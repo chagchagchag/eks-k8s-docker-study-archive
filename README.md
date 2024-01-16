@@ -5,6 +5,17 @@
   - [로컬에서 k8s 클러스터를 구축 - Kind Cluster](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kind-cluster)
   - [로컬에서 k8s 를 사용하기 - minikube](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/minikube)
 - [kustomize 설명문서와 다양한 예제들](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize)
+  - [실습환경 설정](https://github.com/chagchagchag/eks-k8s-docker-study-archive/blob/main/kustomize/%EC%8B%A4%EC%8A%B5%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95.md)
+    - [create-cluster.sh](https://github.com/chagchagchag/eks-k8s-docker-study-archive/blob/main/kustomize/create-cluster.sh), [kustomize-sample-cluster.yml](https://github.com/chagchagchag/eks-k8s-docker-study-archive/blob/main/kustomize/kustomize-sample-cluster.yml)
+  - [kustomize 매뉴얼](https://github.com/chagchagchag/eks-k8s-docker-study-archive/blob/main/kustomize/kustomize.md)
+  - [kustomize 예제모음](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice)
+    - [eg1](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg1) : 표준입출력으로 kustomize 생성 후 클러스터 반영
+    - [eg2](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg2) : ConfigMapGenerator 를 이용해 properties 파일 읽어들이기
+    - [eg3](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg3) : ConfigMapGenerator 가 생성한 configMap 을 Pod 에 지정
+    - [eg4](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg4) : Transformers 를 이용해 이미지 이름, 태그 명 수정되게끔 하기
+    - [eg5.1](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg5.1) : cross-cut (1) - commonAnnotations,commanLabels 등이 가리키는 하위필드 일괄 업데이트
+    - [eg5.2](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg5.2) : cross-cut (2) - 연관관계에 있는 다른 필드 들도 일괄 업데이트 
+    - [eg6](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg6) : Base/Overlay 기능 
 - EKS 를 설치하는 다양한 방법
   - [CloudFormation 을 이용한 방식](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/eks-by-cloudformation)
   - [eksctl 을 이용한 방식](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/eks-by-eksctl)
