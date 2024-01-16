@@ -16,6 +16,8 @@
     - [eg5.1](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg5.1) : cross-cut (1) - commonAnnotations,commanLabels 등이 가리키는 하위필드 일괄 업데이트
     - [eg5.2](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg5.2) : cross-cut (2) - 연관관계에 있는 다른 필드 들도 일괄 업데이트 
     - [eg6](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kustomize/kustomize-practice/eg6) : Base/Overlay 기능 
+- ArgoCD 를 이용한 배포 방법, 매뉴얼, 예제 (문서 작업중)
+  - [fibonacci-backend-argocd](https://github.com/chagchagchag/fibonacci-backend-argocd)
 - EKS 를 설치하는 다양한 방법
   - [CloudFormation 을 이용한 방식](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/eks-by-cloudformation)
   - [eksctl 을 이용한 방식](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/eks-by-eksctl)
