@@ -1,0 +1,11 @@
+namespace: nextjs-3000-base
+namePrefix: dev-
+nameSuffix: "-2024.01.13"
+commonLabels:
+  app: nextjs-2024
+commonAnnotations:
+  gogogo: "홍진호 우승인가요?"
+resources:
+  - nextjs-myapp.yml
+  - nextjs-service.yml
+  - nextjs-ingress.yml
