@@ -32,10 +32,12 @@ source destroy.sh
 
 또는
 
-kind delete cluster --name argocd-cluster
+kind delete cluster --name nextjs-argocd-cluster
 ```
 
-또는 Docker Desktop 에서 `argocd-cluster-control-plane` 을 Delete 합니다.<br>
+또는 Docker Desktop 에서 `nextjs-argocd-cluster-control-plane`, `nextjs-argocd-cluster-worker` 를 Delete 합니다.
+
+<br>
 
 
 
@@ -54,22 +56,10 @@ nodes:
       kubeletExtraArgs:
         node-labels: "ingress-ready=true"
   extraPortMappings:
-  # - containerPort: 80
-  #   hostPort: 80
-  #   protocol: TCP
-  # - containerPort: 443
-  #   hostPort: 443
-  #   protocol: TCP
-  - containerPort: 30009
-    hostPort: 30009 # 여기를 수정하시면 됩니다.
+  - containerPort: 80 # 컨테이너 내부 포트
+    hostPort: 30009 # 여기를 수정하시면, 접속 포트를 바꾸는 것이 가능합니다.
     protocol: TCP
-  - containerPort: 80
-    hostPort: 3000
-    protocol: TCP
-- role: worker
+# - role: worker
 # - role: worker
 # - role: worker
 ```
-
-<br>
-

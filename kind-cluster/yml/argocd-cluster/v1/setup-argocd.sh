@@ -27,6 +27,11 @@ echo ""
 echo "wait(45s) ... "
 sleep 45
 
+# echo ""
+# echo "[setup] ingress (argocd-ingress)"
+# kubectl apply -f argocd-ingress.yml
+
+
 echo ""
-echo "[setup] ingress (argocd-ingress)"
-kubectl apply -f argocd-ingress.yml
+echo "[setup] nodeport (argocd-nodeport)"
+kubectl apply -f argocd-nodeport.yml

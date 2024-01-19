@@ -1,0 +1,28 @@
+# deprecated. ingress 는 nextjs 앱에서만 사용하기로.
+# 개발용도의 argocd 는 ingress 없이 바로 30009 nodeport 로 접근
+# 참고자료 : https://kind.sigs.k8s.io/docs/user/ingress/#using-ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-ingress
+  namespace: argocd
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 443
+      # - pathType: Prefix
+      #   path: /nextjs
+      #   backend:
+      #     service:
+      #       name: nextjs-example-service
+      #       port:
+      #         number: 3000
