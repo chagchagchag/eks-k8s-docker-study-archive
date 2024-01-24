@@ -36,17 +36,10 @@
 
 
 ## Step 2. ArgoCD 구축
-
-- argoCD 공식 github 제공 yml 매니페스트 파일을 이용해 argoCD 설치
-- argoCD 에 HTTP 허용 
-  - 상용인증서를 통해 https 인증을 aws alb 계층에서 ACM과 함께 연동하기엔 비용문제 발생가능. 따라서 개발 버전으로 외부의 HTTP 트래픽을 허용하는 ArgoCD 구축
-  - ArgoCD Deployment 내의 args 에 `--insecure` 옵션 추가 후 재배포
-  - Worker Node 들이 속한 Security Rule 수정
-  - 80 포트 nodeport 생성 (service.yml 작성 → apply)
-  - 80 포트 Rule 이 적용된 Security Rule ID 를 명시한 ingress 생성 (ingress.yml 작성 → apply)
-- 80 포트 허용된 argoCD 에 ingressURL 을 통해 접속해보기
-- ArgoCD 의 Default Password 변경
-
+- EKS 에 ArgoCD 구축
+  - 문서 정리 예정... 크흑...
+- Kind 클러스터에 ArgoCD 구축
+  - 문서 정리 예정... 크흑...
 <br>
 
 
