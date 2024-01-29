@@ -1,6 +1,6 @@
 ### Hi, there 🙌
 
-- [ArgoCD 를 EKS 에 설치할 때에 대한 매뉴얼](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/eks-by-argocd)
+- [ArgoCD 를 EKS 에 설치할 때에 대한 매뉴얼](https://chagchagchag.github.io/docs-argocd-setup-at-eks/)
 - 로컬에서 k8s 환경 구축
   - [로컬에서 k8s 클러스터를 구축 - Kind Cluster](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/kind-cluster)
   - [로컬에서 k8s 를 사용하기 - minikube](https://github.com/chagchagchag/eks-k8s-docker-study-archive/tree/main/minikube)
