@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8shelloboot-app
+spec:
+  containers:
+  - name: k8shelloboot-app
+    image: chagchagchag/k8shelloboot:0.0.1
+
+    # 컨테이너 내부의 연결 위치 지정
+    volumeMounts:
+    - mountPath: /app/volume
+      name: v-volume
+
+  # host 서버의 연결 위치 지정
+  volumes:
+  - name: v-volume
+    hostPath:
+      path: /run/desktop/mnt/host/v/000.env/volume
+      # type: DirectoryOrCreate
